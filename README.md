@@ -1,18 +1,9 @@
-## Getting Started
+## TUBES 1 ALGEO
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Ini adalah repository untuk Tugas Besar Aljabar Linear dan Geometri 1 dengan judul "Sistem Persamaan Linier, Determinan, dan Aplikasinya".
 
-## Folder Structure
+## ANGGOTA KELOMPOK
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+1. Mohammad Farhan Fahrezy (13521106)
+2.
+3.
