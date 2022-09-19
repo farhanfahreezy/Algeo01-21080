@@ -1,6 +1,7 @@
 ## TUBES 1 ALGEO
 
-Ini adalah repository untuk Tugas Besar Aljabar Linear dan Geometri 1 dengan judul "Sistem Persamaan Linier, Determinan, dan Aplikasinya".
+Ini adalah repository untuk Tugas Besar Aljabar Linear dan Geometri 1 dengan judul "Sistem Persamaan Linier, Determinan, dan Aplikasinya". Yang memiliki pustaka meliputi :
+
 - [ ] Menemukan Solusi SPL Metode Eliminasi Gauss 
 - [ ] Menemukan Solusi SPL Metode Eliminasi Gauss Jordan
 - [ ] Menemukan Solusi SPL Matriks Balikan
