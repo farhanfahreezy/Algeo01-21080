@@ -1,7 +1,7 @@
 ## TUBES 1 ALGEO
 
 Ini adalah repository untuk Tugas Besar Aljabar Linear dan Geometri 1 dengan judul "Sistem Persamaan Linier, Determinan, dan Aplikasinya".
-- [ ] Menemukan Solusi SPL Metode Eliminasi Gauss
+- [ ] Menemukan Solusi SPL Metode Eliminasi Gauss 
 - [ ] Menemukan Solusi SPL Metode Eliminasi Gauss Jordan
 - [ ] Menemukan Solusi SPL Matriks Balikan
 - [ ] Menemukan Solusi SPL Kaidah Cramer
@@ -12,5 +12,5 @@ Ini adalah repository untuk Tugas Besar Aljabar Linear dan Geometri 1 dengan jud
 ## ANGGOTA KELOMPOK
 
 1. Mohammad Farhan Fahrezy (13521106)
-2.
-3.
+2. Fajar Maulana Herawan (13521080)
+3. Vieri Fajar Firdaus (13521099)
