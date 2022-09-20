@@ -1,4 +1,5 @@
-class matrix {
+import java.util.Scanner;
+class matriks {
     public double [][] array= new double[100][100] ;
     public int row;
     public int col;
@@ -8,8 +9,30 @@ public class Matrix {
     static int Jumlah(int a, int b){
         return a+b;
     }
+    public static void main(String[] args) {
+        matriks aa=new matriks();
+        inp(aa);
+        
+        display(aa);
+    }
+    static void inp(matriks m){
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("Masukkan baris: ");
+        int baris = scanner.nextInt();
+        System.out.printf("Masukkan kolom: ");
+        int kolom = scanner.nextInt();
 
-    public static int checkzero(matrix m,int index){
+        m.row=baris;
+        m.col=kolom;
+
+        for(int i=0;i<baris;i++){
+            for(int j=0;j<kolom;j++){
+                m.array[i][j]=scanner.nextInt();
+            }
+        }
+        
+    }
+    public static int checkzero(matriks m,int index){
         int res;
         boolean cek;
         cek=true;
@@ -25,10 +48,10 @@ public class Matrix {
         return res;
     }
 
-    public static boolean isSquare(matrix m){
+    public static boolean isSquare(matriks m){
         return m.col==m.row;
     }
-    public static boolean isSegitigaAtas(matrix m){
+    public static boolean isSegitigaAtas(matriks m){
         boolean res;
         res=true;
         for(int i=0;i<m.row;i++){
@@ -40,7 +63,7 @@ public class Matrix {
         }
         return res;
     }
-    public static boolean isSegitigaBawah(matrix m){
+    public static boolean isSegitigaBawah(matriks m){
         boolean res;
         res=true;
         for(int i=0;i<m.row;i++){
@@ -52,7 +75,7 @@ public class Matrix {
         }
         return res;
     }
-    public static matrix swapbaris(matrix m,int x,int y){
+    public static matriks swapbaris(matriks m,int x,int y){
         for(int i=0;i<m.col;i++){
             double temp;
             temp=m.array[x][i];
@@ -61,23 +84,27 @@ public class Matrix {
         }
         return m;
     }
-    public static boolean eselon(matrix m){
+    public static boolean eselon(matriks m){
         int nol;
         boolean res;
         res=true;
-        nol=-1;
+        nol=0;
         for(int i=0;i<m.row;i++){
             // System.out.println(checkzero(m,i));
             if(checkzero(m,i)>nol){
                 nol=checkzero(m,i);
             }
             else{
-                res=false;
+                if(checkzero(m, i)==nol){
+                    if(checkzero(m, i)!=m.col){
+                        res=false;
+                    }
+                }
             }
         }
         return res;
     }
-    public static boolean eselonr(matrix m){
+    public static boolean eselonr(matriks m){
         boolean res;
         res=true;
         if(eselon(m)){
@@ -98,7 +125,27 @@ public class Matrix {
         }
         return res;
     }
-    public static void gauss(matrix m){
+    public static boolean checksolution(matriks m){
+        boolean res=true;
+        for(int i=0;i<m.row;i++){
+            res=false;
+            for(int j=0;j<m.col-1;j++){
+                if(m.array[i][j]!=0){
+                    res=true;
+                }
+            }
+            if(!res){
+                if(m.array[i][m.col-1]==0){
+                    res=true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+    public static void SPL_Gauss(matriks m){
         int idx,res;
         double pengurang;
         idx=1;
@@ -153,7 +200,7 @@ public class Matrix {
         }
         System.out.printf("Hasil determinan %d\n",res);
     }
-    static void display(matrix m){
+    static void display(matriks m){
         for(int i=0;i<m.row;i++){
             for(int j=0;j<m.col;j++){
                 if(j==0){
