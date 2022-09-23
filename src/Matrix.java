@@ -40,7 +40,7 @@ class matriks {
         cek=true;
         res=0;
         for(int i=0;i<this.col;i++){
-            if(this.array[index][i]==0 && cek){
+            if(this.array[index][i]==0.0 && cek){
                 res++;
             }
             else{
@@ -209,7 +209,7 @@ class matriks {
                 }
             }
             //mencari index pengurang
-            int acuan=0;
+            int acuan=-1;
             
             for(int i=0;i<this.col;i++){
                 if(this.array[idx-1][i]!=0){
@@ -219,16 +219,18 @@ class matriks {
             }
 
             // kurangi dengan index atasnya
-            for(int i=idx;i<this.row;i++){
-                pengurang=this.array[i][acuan]/this.array[idx-1][acuan];
-                if(pengurang!=0){
-                    System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,pengurang,idx);
-                    Display();
-                    System.out.println();
-                    for(int j=acuan;j<this.col;j++){
-                        this.array[i][j]-=pengurang*this.array[idx-1][j];
+            if(acuan!=-1){
+                for(int i=idx;i<this.row;i++){
+                    pengurang=this.array[i][acuan]/this.array[idx-1][acuan];
+                    if(pengurang!=0){
+                        System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,pengurang,idx);
+                        Display();
+                        System.out.println();
+                        for(int j=acuan;j<this.col;j++){
+                            this.array[i][j]-=pengurang*this.array[idx-1][j];
+                        }
+                        
                     }
-                    
                 }
             }
             idx++;            
@@ -270,64 +272,76 @@ class matriks {
             // System.out.printf("terdapat %d solusi\n",sumsol);
             for(int i=0;i<this.col-1;i++){
                 PS[i]='X'+Integer.toString(i+1);
-                if(!sol[i]){
-                    // System.out.printf("%d gaada solusi\n",i+1);
-                    Solution[i]+='X'+Integer.toString(i+1);
-                    // System.out.println(Solution[i]);
-                }
             }
 
 
             // Solusi pertama
             for(int i=0;i<this.row;i++){
-                boolean cek=true;
-                for(int j=0;j<this.col-1;j++){
-                    if(this.array[i][j]!=0 && cek){
-                        cek=false;
+                boolean temp=true;
+                for(int j=0;j<this.col;j++){
+                    
+                    if(this.array[i][j]!=0 && temp){
                         int banyaksolusi=0;
-                        for(int k=j+1;k<this.col-1;k++){
-                            if(this.array[i][k]!=0){
-                                if(banyaksolusi==0){
-                                    if(this.array[i][k]==-1){
-                                        Solution[j]+=PS[k]+' ';
-                                    }
-                                    else if(this.array[i][k]==1){
-                                        Solution[j]+='-'+PS[k]+' ';
-                                    }
-                                    else{
-                                        Solution[j]+=String.format("%.2f",-1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
-                                    }
+                        temp=false;
+                        for(int k=j;k<this.col-1;k++){
+                            if(banyaksolusi==0){
+                                if(this.array[i][k]==1.0 || this.array[i][k]==-1.0){
+                                    Solution[i]+=PS[k]+' '; // aman
                                 }
-                                else{
-                                    if(this.array[i][k]<0){
-                                        Solution[j]+="+ "+String.format("%.2f",-1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
-                                    }
-                                    else{
-                                        Solution[j]+=String.format("%.2f",-1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
-                                    }
+                                else if(this.array[i][k]!=0){
+                                    Solution[i]+=String.format("%.2f",this.array[i][k])+'*'+PS[k]+' '; // aman
                                 }
-                                banyaksolusi++;
-                            }
-                        }
-                        if(this.array[i][this.col-1]!=0){
-                            if(this.array[i][this.col-1]>0){
-                                Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
                             }
                             else{
-                                Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
+                                if(this.array[i][k]>0){
+                                    if(this.array[i][k]==1.0){
+                                        Solution[i]+="+ "+PS[k]+' '; // aman
+                                    }
+                                    else{
+                                        Solution[i]+="+"+String.format("%.2f",this.array[i][k])+'*'+PS[k]+' '; // aman
+                                    }
+                                }
+                                else if(this.array[i][k]<0){
+                                    if(this.array[i][k]==-1.0){
+                                        Solution[i]+="- "+PS[k]+' '; 
+                                    }
+                                    else{
+                                        Solution[i]+="-"+String.format("%.2f",-this.array[i][k])+'*'+PS[k]+' ';
+                                    }
+                                }
+                                
                             }
+                            
+                            banyaksolusi++;
                         }
                     }
                 }
+                Solution[i]+=String.format("= %.2f",this.array[i][this.col-1]);
             }
+            System.out.println();
+            System.out.println("Hasil persamaan Gauss diperoleh sebagai berikut\n");
             for(int i=0;i<this.col-1;i++){
-                System.out.printf("X%d = %s\n",i+1,Solution[i]);
+                if(CheckZero(i)!=this.col){
+                    System.out.printf("%s\n",Solution[i]);
+                }
             }
-
 
             for(int i=0;i<100;i++){
+                PS[i]="";
                 Solution[i]="";
             }
+            // System.out.printf("terdapat %d solusi\n",sumsol);
+            for(int i=0;i<this.col-1;i++){
+                PS[i]='X'+Integer.toString(i+1);
+            }
+            // solusi x1,x2,x3,...
+            System.out.println("ngurangi jordan\n");
+            
+            for(int i=0;i<100;i++){
+                PS[i]="";
+                Solution[i]="";
+            }
+            // System.out.printf("terdapat %d solusi\n",sumsol);
             for(int i=0;i<this.col-1;i++){
                 PS[i]='X'+Integer.toString(i+1);
                 if(!sol[i]){
@@ -336,25 +350,25 @@ class matriks {
                     // System.out.println(Solution[i]);
                 }
             }
-            System.out.println();
-            System.out.println("Setelah diolah\n");
-            System.out.println();
-            // setelah diolah dijadikan jordan
             for(int i=this.row-1;i>=0;i--){
                 boolean cek=true;
                 for(int j=0;j<=this.col;j++){
+                    // sudah ketemu index pengurang
                     if(this.array[i][j]!=0 && cek){
-                        KaliMatriks(1/this.array[i][j], i);
                         cek=false;
+                        KaliMatriks(1/this.array[i][j],i);
                         for(int k=i-1;k>=0;k--){
                             if(this.array[k][j]!=0){
+                                
                                 KurangmMatriks(k, i, this.array[k][j]);
+                                // Display();
+                                // System.out.println();
                             }
                         }
                     }
                 }
             }
-            Display();
+            // Display();
             for(int i=0;i<this.row;i++){
                 boolean cek=true;
                 for(int j=0;j<this.col-1;j++){
@@ -386,11 +400,19 @@ class matriks {
                             }
                         }
                         if(this.array[i][this.col-1]!=0){
+
                             if(this.array[i][this.col-1]>0){
-                                Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+                                if(banyaksolusi==0){
+                                    Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
+
+                                }
+                                else{
+                                    Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+
+                                }
                             }
                             else{
-                                Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
+                                Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
                             }
                         }
                     }
@@ -406,6 +428,9 @@ class matriks {
                 System.out.println("Solusi banyak\n");
             }
         }
+            
+            
+        
         
 
     }
@@ -415,7 +440,7 @@ class matriks {
         double pengurang;
         idx=1;
         int [] nol = new int[10];
-        while(!Eselon() && idx<this.row){
+        while(!Eselon() || idx<this.row){
             for(int i=0;i<this.row;i++){
                 nol[i]=CheckZero(i);
             }
@@ -456,45 +481,48 @@ class matriks {
                 }
             }
             //mencari index pengurang
-            int acuan=0;
+            int acuan=-1;
             
             for(int i=0;i<this.col;i++){
-                if(this.array[idx-1][i]!=0){
+                if(this.array[idx-1][i]!=0.0){
                     acuan=i;
                     break;
                 }
             }
 
             // kurangi dengan index atasnya
-            for(int i=idx;i<this.row;i++){
-                pengurang=this.array[i][acuan]/this.array[idx-1][acuan];
-                if(pengurang!=0){
-                    if(pengurang>0){
-                        if(this.array[i][acuan]==this.array[idx-1][acuan]){
-
-                            System.out.printf("R%d -> R%d - R%d\n",i+1,i+1,idx);
+            if(acuan!=-1){
+                for(int i=idx;i<this.row;i++){
+                    pengurang=this.array[i][acuan]/this.array[idx-1][acuan];
+                    if(pengurang!=0.0){
+                        if(pengurang>0.0){
+                            if(this.array[i][acuan]==this.array[idx-1][acuan]){
+    
+                                System.out.printf("R%d -> R%d - R%d\n",i+1,i+1,idx);
+                            }
+                            else{
+                                System.out.printf("R%d -> R%d - %.2f*R%d\n",i+1,i+1,pengurang,idx);
+                            }
                         }
                         else{
-                            System.out.printf("R%d -> R%d - %.2f*R%d\n",i+1,i+1,pengurang,idx);
+                            if(this.array[idx-1][acuan]==this.array[i][acuan]){
+    
+                                System.out.printf("R%d -> R%d + R%d\n",i+1,i+1,idx);
+                            }
+                            else{
+                                System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,-pengurang,idx);
+                            }
                         }
-                    }
-                    else{
-                        if(this.array[idx-1][acuan]==this.array[i][acuan]){
-
-                            System.out.printf("R%d -> R%d + R%d\n",i+1,i+1,idx);
+                        for(int j=acuan;j<this.col;j++){
+                            this.array[i][j]-=pengurang*this.array[idx-1][j];
                         }
-                        else{
-                            System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,-pengurang,idx);
-                        }
+                        Display();
+                        System.out.println();
+                        
                     }
-                    for(int j=acuan;j<this.col;j++){
-                        this.array[i][j]-=pengurang*this.array[idx-1][j];
-                    }
-                    Display();
-                    System.out.println();
-                    
                 }
             }
+            
 
             // menjadikan index awal menjadi 1
             
@@ -559,23 +587,42 @@ class matriks {
                 }
             }
 
-
+            System.out.println("ngurangi jordan\n");
             for(int i=this.row-1;i>=0;i--){
                 boolean cek=true;
                 for(int j=0;j<=this.col;j++){
+                    // sudah ketemu index pengurang
                     if(this.array[i][j]!=0 && cek){
                         cek=false;
                         for(int k=i-1;k>=0;k--){
                             if(this.array[k][j]!=0){
-
+                                if(this.array[k][j]>0){
+                                    if(this.array[k][j]==-this.array[i][j]){
+            
+                                        System.out.printf("R%d -> R%d - R%d\n",k+1,k+1,idx);
+                                    }
+                                    else{
+                                        System.out.printf("R%d -> R%d - %.2f*R%d\n",k+1,k+1,this.array[k][j],idx);
+                                    }
+                                }
+                                else{
+                                    if(this.array[k][j]==-this.array[i][j]){
+            
+                                        System.out.printf("R%d -> R%d + R%d\n",k+1,k+1,idx);
+                                    }
+                                    else{
+                                        System.out.printf("R%d -> R%d + %.2f*R%d\n",k+1,k+1,-this.array[k][j],idx);
+                                    }
+                                }
                                 KurangmMatriks(k, i, this.array[k][j]);
                                 Display();
+                                System.out.println();
                             }
                         }
                     }
                 }
             }
-            Display();
+            // Display();
             for(int i=0;i<this.row;i++){
                 boolean cek=true;
                 for(int j=0;j<this.col-1;j++){
@@ -607,11 +654,19 @@ class matriks {
                             }
                         }
                         if(this.array[i][this.col-1]!=0){
+
                             if(this.array[i][this.col-1]>0){
-                                Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+                                if(banyaksolusi==0){
+                                    Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
+
+                                }
+                                else{
+                                    Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+
+                                }
                             }
                             else{
-                                Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
+                                Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
                             }
                         }
                     }
@@ -640,8 +695,15 @@ public class Matrix {
         // s[0]=Integer.toString(i);
         // System.out.println(s[0]);
         matriks m = new matriks();
+        matriks mm=new matriks();
         m.IsiMatriks();
-        m.SPL_GaussJordan();
+        System.out.println("Gauss \n");
+        m.SPL_Gauss();
+        // mm.IsiMatriks();
+        // System.out.println("Gauss \n");
+        // mm.SPL_Gauss();
+        // System.out.println("Gauss Jordan\n");
+        // m.SPL_GaussJordan();
     }
     
     
