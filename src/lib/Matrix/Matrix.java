@@ -1,3 +1,4 @@
+package lib.Matrix;
 import java.util.Scanner;
 class matriks {
 
@@ -178,6 +179,7 @@ class matriks {
     // mengurangi seluruh baris pada matriks indeks ke-idx1 dengan matriks pada baris ke-idx2 dikali dengan pengali
     void KurangmMatriks(int idx1,int idx2,double pengali){
         for(int i=0;i<=this.col;i++){
+            if(this.array[idx1][i]!=0 && this.array[idx2][i]!=0)
             this.array[idx1][i]=this.array[idx1][i]-pengali*this.array[idx2][i];
         }
     }
