@@ -6,9 +6,6 @@
 | Fajar Maulana Herawan     | 13521080 |
 | Vieri Fajar Firdaus      | 13521099  |   
 | Mohammad Farhan Fahrezy | 13521105      |   
-1. Mohammad Farhan Fahrezy (13521106)
-2. Fajar Maulana Herawan (13521080)
-3. Vieri Fajar Firdaus (13521099)
 
 ## Menjalankan Program 
 
