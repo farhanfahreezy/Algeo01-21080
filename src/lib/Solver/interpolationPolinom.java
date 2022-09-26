@@ -37,6 +37,7 @@ public class interpolationPolinom {
             }
         }
         this.point.Display();
+        myobj.close();
     }
     
     public void persamaanPolinom(){

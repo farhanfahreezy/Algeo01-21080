@@ -13,7 +13,7 @@ public class SPL_Balikan {
 
         // Membuat matrix augmented dari inverse
         Matrix inverse2 = new Matrix();
-        inverse2.copyMatrix(inverse, inverse2);
+        Matrix.copyMatrix(inverse, inverse2);
         inverse2.col*=2;
         for(i=0;i<inverse.row;i++){
             for(j=inverse.col;j<inverse2.col;j++){

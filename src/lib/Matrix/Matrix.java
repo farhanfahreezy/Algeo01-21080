@@ -33,6 +33,7 @@ public class Matrix {
                 this.array[i][j]=scanner.nextInt();
             }
         }
+        scanner.close();
     }
     // mengecek banyak nol pada indeks awal
     public int CheckZero(int index){
@@ -884,6 +885,17 @@ public class Matrix {
                         
                     }
                 }
+            }
+        }
+    }
+
+    public static void copyMatrix(Matrix Min, Matrix Mout){
+        Mout.row = Min.row;
+        Mout.col = Min.col;
+        int i,j;
+        for(i=0;i<Min.row;i++){
+            for(j=0;j<Min.col;j++){
+                Mout.array[i][j]=Min.array[i][j];
             }
         }
     }
