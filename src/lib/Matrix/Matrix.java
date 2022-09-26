@@ -1,6 +1,6 @@
 package lib.Matrix;
 import java.util.Scanner;
-class matriks {
+public class Matrix {
 
     //Atribut
     public double [][] array= new double[100][100] ;
@@ -10,7 +10,7 @@ class matriks {
     // Method
 
     // Konstruktor
-    matriks(){
+    public Matrix(){
         for(int i=0;i<100;i++){
             for(int j=0;j<100;j++){
                 this.array[i][j]=0;
@@ -18,7 +18,7 @@ class matriks {
         }
     }
     // input matriks dengan n baris dan m kolom
-    void IsiMatriks(){
+    public void IsiMatriks(){
         Scanner scanner = new Scanner(System.in);
         System.out.printf("Masukkan baris: ");
         int baris = scanner.nextInt();
@@ -35,7 +35,7 @@ class matriks {
         }
     }
     // mengecek banyak nol pada indeks awal
-    int CheckZero(int index){
+    public int CheckZero(int index){
         int res;
         boolean cek;
         cek=true;
@@ -52,12 +52,12 @@ class matriks {
     }
 
     //mengecek matriks persegi 
-    boolean isSquare(){
+    public boolean isSquare(){
         return this.col==this.row;
     }
 
     //mengecek matriks segitiga atas
-    boolean isSegitigaAtas(){
+    public boolean isSegitigaAtas(){
         boolean res;
         res=true;
         for(int i=0;i<this.row;i++){
@@ -887,28 +887,4 @@ class matriks {
             }
         }
     }
-}
-
-public class Matrix {
-    
-    public static void main(String[] args) {
-        // int i=1234;
-        // String [] s=new String[100];
-        // s[0]=Integer.toString(i);
-        // System.out.println(s[0]);
-        matriks m = new matriks();
-        matriks mm=new matriks();
-        m.IsiMatriks();
-        // System.out.println("Gauss \n");
-        // m.SPL_Gauss();
-        System.out.println("RLB\n");
-        m.Regresi_Linear_Berganda();
-        // mm.IsiMatriks();
-        // System.out.println("Gauss \n");
-        // mm.SPL_Gauss();
-        // System.out.println("Gauss Jordan\n");
-        // m.SPL_GaussJordan();
-    }
-    
-    
 }
