@@ -71,7 +71,7 @@ public class Matrix {
     }
 
     // mengecek matriks segitiga bawah
-    boolean isSegitigaBawah(){
+    public boolean isSegitigaBawah(){
         boolean res;
         res=true;
         for(int i=0;i<this.row;i++){
@@ -85,7 +85,7 @@ public class Matrix {
     }
 
     // menukar matriks indeks ke-x dengan matriks indeks ke-y
-    void SwapBaris(int x,int y){
+    public void SwapBaris(int x,int y){
         for(int i=0;i<this.col;i++){
             double temp;
             temp=this.array[x][i];
@@ -95,7 +95,7 @@ public class Matrix {
     }
 
     // mengecek matriks eselon
-    boolean Eselon(){
+    public boolean Eselon(){
         int nol;
         boolean res;
         res=true;
@@ -119,7 +119,7 @@ public class Matrix {
     }
 
     // mengecek matriks eselon reduksi
-    boolean EselonR(){
+    public boolean EselonR(){
         boolean res;
         res=true;
         if(Eselon()){
@@ -142,7 +142,7 @@ public class Matrix {
     }
 
     // menampilkan matriks
-    void Display(){
+    public void Display(){
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
                 if(j==0){
@@ -157,7 +157,7 @@ public class Matrix {
     }
 
     // mengecek pada matriks terdapat solusi atau tidak
-    boolean CheckSolution(){
+    public boolean CheckSolution(){
         boolean res=true;
         for(int i=0;i<this.row;i++){
             if(CheckZero(i)==this.col-1){
@@ -168,7 +168,7 @@ public class Matrix {
     }
 
     // mengalikan seluruh baris pada matriks indeks ke-index dengan pengali
-    void KaliMatriks(double pengali,int index){
+    public void KaliMatriks(double pengali,int index){
         for(int i=0;i<=this.col;i++){
             if(this.array[index][i]!=0){
                 this.array[index][i]*=pengali;
@@ -177,14 +177,14 @@ public class Matrix {
     }
 
     // mengurangi seluruh baris pada matriks indeks ke-idx1 dengan matriks pada baris ke-idx2 dikali dengan pengali
-    void KurangmMatriks(int idx1,int idx2,double pengali){
+    public void KurangmMatriks(int idx1,int idx2,double pengali){
         for(int i=0;i<=this.col;i++){
             if(this.array[idx1][i]!=0 && this.array[idx2][i]!=0)
             this.array[idx1][i]=this.array[idx1][i]-pengali*this.array[idx2][i];
         }
     }
 
-    void SPL_Gauss(){
+    public void SPL_Gauss(){
         int idx;
         double pengurang;
         idx=1;
@@ -455,7 +455,7 @@ public class Matrix {
 
     }
     
-    void SPL_GaussJordan(){
+    public void SPL_GaussJordan(){
         int idx;
         double pengurang;
         idx=1;
@@ -706,7 +706,7 @@ public class Matrix {
 
     }
 
-    void Hasil_OBE(){
+    public void Hasil_OBE(){
         int idx;
         double pengurang;
         idx=1;
@@ -813,7 +813,7 @@ public class Matrix {
             }            
         }
     }
-    float sum1(int col1){
+    public float sum1(int col1){
         float sum;
         sum=0;
         for(int i=0;i<this.row;i++){
@@ -821,7 +821,7 @@ public class Matrix {
         }
         return sum;
     }
-    float sum2(int col1,int col2){
+    public float sum2(int col1,int col2){
         float sum;
         sum=0;
         for(int i=0;i<this.row;i++){
@@ -829,7 +829,7 @@ public class Matrix {
         }
         return sum;
     }
-    void Regresi_Linear_Berganda(){
+    public void Regresi_Linear_Berganda(){
         float[][] arrayl = new float[1000][1000];
         int a;
         a=this.row;
