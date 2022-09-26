@@ -142,7 +142,7 @@ public class Matrix {
     }
 
     // menampilkan matriks
-    public void Display(){
+    void Display(){
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
                 if(j==0){
@@ -419,21 +419,21 @@ public class Matrix {
                                 banyaksolusi++;
                             }
                         }
-                        if(this.array[i][this.col-1]!=0){
+                        if(this.array[i][this.col-1]==0){
+                            Solution[j]+=String.format("0.00");
+                        }
+                        else if(this.array[i][this.col-1]>0){
+                            if(banyaksolusi==0){
+                                Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
 
-                            if(this.array[i][this.col-1]>0){
-                                if(banyaksolusi==0){
-                                    Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
-
-                                }
-                                else{
-                                    Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
-
-                                }
                             }
                             else{
-                                Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
+                                Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+
                             }
+                        }
+                        else{
+                            Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
                         }
                     }
                 }
@@ -619,19 +619,19 @@ public class Matrix {
                                 if(this.array[k][j]>0){
                                     if(this.array[k][j]==-this.array[i][j]){
             
-                                        System.out.printf("R%d -> R%d - R%d\n",k+1,k+1,idx);
+                                        System.out.printf("R%d -> R%d - R%d\n",k+1,k+1,i+1);
                                     }
                                     else{
-                                        System.out.printf("R%d -> R%d - %.2f*R%d\n",k+1,k+1,this.array[k][j],idx);
+                                        System.out.printf("R%d -> R%d - %.2f*R%d\n",k+1,k+1,this.array[k][j],i+1);
                                     }
                                 }
                                 else{
                                     if(this.array[k][j]==-this.array[i][j]){
             
-                                        System.out.printf("R%d -> R%d + R%d\n",k+1,k+1,idx);
+                                        System.out.printf("R%d -> R%d + R%d\n",k+1,k+1,i+1);
                                     }
                                     else{
-                                        System.out.printf("R%d -> R%d + %.2f*R%d\n",k+1,k+1,-this.array[k][j],idx);
+                                        System.out.printf("R%d -> R%d + %.2f*R%d\n",k+1,k+1,-this.array[k][j],i+1);
                                     }
                                 }
                                 KurangmMatriks(k, i, this.array[k][j]);
@@ -673,21 +673,21 @@ public class Matrix {
                                 banyaksolusi++;
                             }
                         }
-                        if(this.array[i][this.col-1]!=0){
+                        if(this.array[i][this.col-1]==0){
+                            Solution[j]+=String.format("0.00");
+                        }
+                        else if(this.array[i][this.col-1]>0){
+                            if(banyaksolusi==0){
+                                Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
 
-                            if(this.array[i][this.col-1]>0){
-                                if(banyaksolusi==0){
-                                    Solution[j]+=String.format("%f",array[i][this.col-1]/this.array[i][j]);
-
-                                }
-                                else{
-                                    Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
-
-                                }
                             }
                             else{
-                                Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
+                                Solution[j]+=String.format("+ %f",array[i][this.col-1]/this.array[i][j]);
+
                             }
+                        }
+                        else{
+                            Solution[j]+=String.format("- %f",-array[i][this.col-1]/this.array[i][j]);
                         }
                     }
                 }
@@ -706,7 +706,7 @@ public class Matrix {
 
     }
 
-    public void Hasil_OBE(){
+    void Hasil_OBE(){
         int idx;
         double pengurang;
         idx=1;
@@ -886,5 +886,12 @@ public class Matrix {
                 }
             }
         }
+    }
+    public static void main(String[] args) {
+        Matrix a = new Matrix();
+        a.IsiMatriks();
+        // a.SPL_GaussJordan();
+        // a.Display();
+        a.SPL_Gauss();
     }
 }
