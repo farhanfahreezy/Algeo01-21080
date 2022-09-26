@@ -142,7 +142,7 @@ public class Matrix {
     }
 
     // menampilkan matriks
-    void Display(){
+    public void Display(){
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
                 if(j==0){
@@ -706,7 +706,7 @@ public class Matrix {
 
     }
 
-    void Hasil_OBE(){
+    public void Hasil_OBE(){
         int idx;
         double pengurang;
         idx=1;
