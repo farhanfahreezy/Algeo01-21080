@@ -9,8 +9,7 @@ import lib.Solver.SPL_Balikan;
 public class interpolationBicubic {
     Matrix matriksInput = new Matrix();
     Matrix matriks = new Matrix();
-    String persamaan;
-    double a,b;
+    double a,b,hasilInterpolasi;
 
     public void inputMatrix() {
         /*
@@ -21,20 +20,33 @@ public class interpolationBicubic {
         Scanner input = new Scanner(System.in);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                matriksInput.array[i][j] = input.nextDouble();
+                this.matriksInput.array[i][j] = input.nextDouble();
             }
         }
-        a = input.nextDouble();
-        b = input.nextDouble();
+        this.a = input.nextDouble();
+        this.b = input.nextDouble();
+        this.matriksInput.row = 4;
+        this.matriksInput.col = 4;
     }
     
-    public void persamaanInterpolasi() {
+    public void hasilBicubicInterpolasi() {
         /*
-         * Mengeluarkan persamaan interpolasi dari matriks yang telah diinputkan
+         * Mengeluarkan hasil interpolasi dari matriks yang telah diinputkan
          * I.S. Matriks terdefinisi
-         * F.S. Persamaan interpolasi ditampilkan
+         * F.S. hasil interpolasi ditampilkan
          */
         
+         //Ubah ukuran matriksInput dari 4x4 menjadi 16x1
+        Matrix hasil = new Matrix();
+        hasil.row = 16;
+        hasil.col = 1;
+        int k = 0;
+        for (int m = 0; m < 4; m++) {
+            for (int n = 0; n < 4; n++) {
+                hasil.array[k][0] = this.matriksInput.array[m][n];
+                k++;
+            }
+        }
          //Mengisi matriks
         int col = 0;
         int row = 0;
@@ -42,7 +54,7 @@ public class interpolationBicubic {
             for (int x = -1;x<3;x++){
                 for (int j = 0;j<4;j++){
                     for (int i = 0;i<4;i++){
-                        matriks.array[row][col]=Math.pow(x, i)*Math.pow(y, j);
+                        this.matriks.array[row][col]=Math.pow(x, i)*Math.pow(y, j);
                         col++;
                     }
                 }
@@ -50,12 +62,28 @@ public class interpolationBicubic {
                 row++;
             }
         }
-        matriks.col = 16;
-        matriks.row = 16;
+        this.matriks.col = 16;
+        this.matriks.row = 16;
         //Create inverse
-        SPL_Balikan.Balikan(matriks);
-        matriks.Display();
-
+        Matrix inverse = new Matrix();
+        inverse.row = 16;
+        inverse.col = 16;
+        inverse = SPL_Balikan.INV_GaussJordan(matriks);
+        //Hasil kali inverse dengan matriks input
+        Matrix hasilKali = new Matrix();
+        hasilKali.row = 16;
+        hasilKali.col = 1;
+        hasilKali = Matrix.KaliMatrix(inverse, hasil);
+        //Hasil interpolasi f(a,b)
+        this.hasilInterpolasi = 0;
+        k = 0;
+        for (int j = 0;j<4;j++){
+            for (int i = 0;i<4;i++){
+                this.hasilInterpolasi = this.hasilInterpolasi + hasilKali.array[k][0]*Math.pow(this.a, i)*Math.pow(this.b, j);
+                k++;
+            }
+        }
+        System.out.printf("f(%.2f,%.2f) = %.3f",this.a,this.b,this.hasilInterpolasi);
     }
 
     public void inputMatrixFile(String filename) {
@@ -73,17 +101,17 @@ public class interpolationBicubic {
                 String[] temp = line.split(" ");
                 if (row <4){
                     for (int i = 0; i < temp.length; i++) {
-                        matriksInput.array[row][i] = Double.parseDouble(temp[i]);
+                        this.matriksInput.array[row][i] = Double.parseDouble(temp[i]);
                     }
                 }else{
-                    a = Double.parseDouble(temp[0]);
-                    b = Double.parseDouble(temp[1]);
+                    this.a = Double.parseDouble(temp[0]);
+                    this.b = Double.parseDouble(temp[1]);
                 }
                 row++;
             }
             br.close();
-            matriksInput.row = row-1;
-            matriksInput.col = row-1;
+            this.matriksInput.row = row-1;
+            this.matriksInput.col = row-1;
         }
         catch (Exception e) {
             System.out.println("File tidak ditemukan");
@@ -99,8 +127,7 @@ public class interpolationBicubic {
          */
         try {
             FileWriter file = new FileWriter("hasil/"+filename);
-            file.write(this.persamaan);
-            file.write("\n");
+            file.write("f("+this.a+","+this.b+") = "+String.format("%.3f", this.hasilInterpolasi));
             file.close();
         }
         catch (Exception e) {
@@ -110,7 +137,10 @@ public class interpolationBicubic {
     }
         public static void main(String[] args) {
         interpolationBicubic interpolasi = new interpolationBicubic();
-        interpolasi.persamaanInterpolasi();
+        interpolasi.inputMatrixFile("2.txt");
+        interpolasi.hasilBicubicInterpolasi();
+        interpolasi.outputMatrixFile("hasilbicubic.txt");
+
         }
     }
 

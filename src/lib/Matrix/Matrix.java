@@ -409,7 +409,7 @@ public class Matrix {
             }
         }
     }
-    public Matrix KaliMatrix(Matrix m1,Matrix m2) {
+    public static Matrix KaliMatrix(Matrix m1,Matrix m2) {
        /*
         * Spesifikasi Fungsi : menerima masukan matriks m1 dan m2, mengalikan matriks m1 dan m2, dan mengembalikan hasil perkalian matriks tersebut
         */
@@ -425,6 +425,7 @@ public class Matrix {
                 }
             }
         }
+        m3.mintoZero();
         return m3;
     }
     
