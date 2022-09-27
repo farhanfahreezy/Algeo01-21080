@@ -10,7 +10,7 @@ public class SPL_Gauss {
         int idx;
         double pengurang;
         idx=1;
-        int [] nol = new int[10];
+        int [] nol = new int[1000];
         while(!solver.Eselon() || idx<solver.row){
             for(int i=0;i<solver.row;i++){
                 nol[i]=solver.CheckZero(i);
@@ -82,7 +82,7 @@ public class SPL_Gauss {
 
         
 
-        boolean [] sol = new boolean[100];
+        boolean [] sol = new boolean[1000];
         for(int i=0;i<solver.row;i++){
             boolean cek=true;
             for(int j=0;j<solver.col-1;j++){
@@ -241,7 +241,7 @@ public class SPL_Gauss {
                                 banyaksolusi++;
                             }
                         }
-                        if(solver.array[i][solver.col-1]==0){
+                        if(solver.array[i][solver.col-1]==0 && banyaksolusi==0){
                             Solution[j]+=String.format("0.00");
                         }
                         else if(solver.array[i][solver.col-1]>0){

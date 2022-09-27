@@ -221,7 +221,7 @@ public class SPL_GaussJordan {
                                 banyaksolusi++;
                             }
                         }
-                        if(solver.array[i][solver.col-1]==0){
+                        if(solver.array[i][solver.col-1]==0 && banyaksolusi==0){
                             Solution[j]+=String.format("0.00");
                         }
                         else if(solver.array[i][solver.col-1]>0){
@@ -252,5 +252,10 @@ public class SPL_GaussJordan {
         }
         
 
+    }
+    public static void main(String[] args) {
+        Matrix a = new Matrix();
+        a.IsiMatriks();
+        SPL_GaussJordan.Jordan(a);
     }
 }
