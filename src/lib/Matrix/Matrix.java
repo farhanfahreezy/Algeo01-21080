@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Matrix {
 
     //Atribut
-    public double [][] array= new double[100][100] ;
+    public double [][] array= new double[1000][1000] ;
     public int row;
     public int col;
 
@@ -30,7 +30,7 @@ public class Matrix {
 
         for(int i=0;i<baris;i++){
             for(int j=0;j<kolom;j++){
-                this.array[i][j]=scanner.nextInt();
+                this.array[i][j]=scanner.nextDouble();
             }
         }
         scanner.close();
@@ -147,10 +147,24 @@ public class Matrix {
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
                 if(j==0){
-                    System.out.printf("%.2f",this.array[i][j]);
+                    if(this.array[i][j]==0.0){
+                        System.out.printf("%f",this.array[i][j]);
+
+                    }
+                    else{
+                        System.out.printf("%f",this.array[i][j]);
+
+                    }
                 }
                 else{
-                    System.out.printf(" %.2f",this.array[i][j]);
+                    if(this.array[i][j]==-0.000000){
+                        System.out.printf(" %f",this.array[i][j]);
+
+                    }
+                    else{
+                        System.out.printf(" %f",this.array[i][j]);
+
+                    }
                 }
             }
             System.out.println();
@@ -170,8 +184,8 @@ public class Matrix {
 
     // mengalikan seluruh baris pada matriks indeks ke-index dengan pengali
     public void KaliMatriks(double pengali,int index){
-        for(int i=0;i<=this.col;i++){
-            if(this.array[index][i]!=0){
+        for(int i=0;i<this.col;i++){
+            if(this.array[index][i]!=0.0){
                 this.array[index][i]*=pengali;
             }
         }
@@ -180,7 +194,7 @@ public class Matrix {
     // mengurangi seluruh baris pada matriks indeks ke-idx1 dengan matriks pada baris ke-idx2 dikali dengan pengali
     public void KurangmMatriks(int idx1,int idx2,double pengali){
         for(int i=0;i<=this.col;i++){
-            if(this.array[idx2][i]!=0){
+            if(this.array[idx2][i]!=0.0){
                 this.array[idx1][i]=this.array[idx1][i]-pengali*this.array[idx2][i];
             }
         }
@@ -191,7 +205,7 @@ public class Matrix {
         int idx;
         double pengurang;
         idx=1;
-        int [] nol = new int[10];
+        int [] nol = new int[5000];
         while(!Eselon() || idx<this.row){
             for(int i=0;i<this.row;i++){
                 nol[i]=CheckZero(i);
@@ -207,6 +221,7 @@ public class Matrix {
                         nol[i]=temp1;
 
                         SwapBaris(i, j);
+                        mintoZero();
                     }
                 }
             }
@@ -216,7 +231,9 @@ public class Matrix {
                 if(this.array[idx-1][j]!=0 && cek){
                     cek=false;
                     if(this.array[idx-1][j]!=1){
+                        mintoZero();
                         KaliMatriks(1/this.array[idx-1][j], idx-1);
+                        mintoZero();
                     }
                 }
             }
@@ -235,9 +252,12 @@ public class Matrix {
                 for(int i=idx;i<this.row;i++){
                     pengurang=this.array[i][acuan]/this.array[idx-1][acuan];
                     if(pengurang!=0.0){
-                        for(int j=acuan;j<this.col;j++){
-                            this.array[i][j]-=pengurang*this.array[idx-1][j];
-                        }
+                        mintoZero();
+                        KurangmMatriks(i, idx-1, pengurang);
+                        mintoZero();
+                        // for(int j=acuan;j<this.col;j++){
+                        //     this.array[i][j]-=pengurang*this.array[idx-1][j];
+                        // }
                         
                     }
                 }
@@ -254,12 +274,14 @@ public class Matrix {
             if(this.array[idx-1][j]!=0 && cek2){
                 cek2=false;
                 if(this.array[idx-1][j]!=1){
+                    mintoZero();
                     KaliMatriks(1/this.array[idx-1][j], idx-1);
+                    mintoZero();
                 }
             }
         }
 
-        boolean [] sol = new boolean[100];
+        boolean [] sol = new boolean[5000];
         for(int i=0;i<this.row;i++){
             boolean cek=true;
             for(int j=0;j<this.col-1;j++){
@@ -270,13 +292,6 @@ public class Matrix {
             }
         }
         
-        int sumsol;
-        sumsol=0;
-        for(int i=0;i<this.col-1;i++){
-            if(sol[i]){
-                sumsol++;
-            }
-        }
         if(CheckSolution()){
             for(int i=this.row-1;i>=0;i--){
                 boolean cek=true;
@@ -286,7 +301,9 @@ public class Matrix {
                         cek=false;
                         for(int k=i-1;k>=0;k--){
                             if(this.array[k][j]!=0){
+                                mintoZero();
                                 KurangmMatriks(k, i, this.array[k][j]);
+                                mintoZero();
                             }
                         }
                     }
@@ -378,5 +395,29 @@ public class Matrix {
                 Mout.array[i][j]=Min.array[i][j];
             }
         }
+    }
+    public void mintoZero(){
+        for(int i=0;i<this.row;i++){
+            for(int j=0;j<this.col;j++){
+                if(-0.000000000001<this.array[i][j] && this.array[i][j]<0.00000000001){
+                    this.array[i][j]=0.0;
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Matrix a = new Matrix();
+        a.IsiMatriks();
+        a.KurangmMatriks(0, 1, -1);
+        a.KaliMatriks(-1, 2);
+        a.Display();
+        a.mintoZero();
+        a.Display();
+        double aa=0.0;
+        aa*=-1;
+        System.out.printf("%f",aa);
+        // a.SPL_GaussJordan();
+        // a.Display();
+        
     }
 }
