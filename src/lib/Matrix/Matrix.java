@@ -386,6 +386,7 @@ public class Matrix {
         }
     }
 
+    // Melakukan transpose matrix
     public static void copyMatrix(Matrix Min, Matrix Mout){
         Mout.row = Min.row;
         Mout.col = Min.col;
@@ -402,6 +403,19 @@ public class Matrix {
                 if(-0.000000000001<this.array[i][j] && this.array[i][j]<0.00000000001){
                     this.array[i][j]=0.0;
                 }
+            }
+        }
+    }
+
+    
+    // Melakukan transpose matrix
+    public static void transpose(Matrix Min){
+        Matrix M2 = new Matrix();
+        copyMatrix(Min, M2);
+        int i,j;
+        for(i=0;i<Min.row;i++){
+            for(j=0;j<Min.col;j++){
+                Min.array[i][j]=M2.array[j][i];
             }
         }
     }
