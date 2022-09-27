@@ -154,7 +154,7 @@ public class interpolationPolinom {
         interpolationPolinom test = new interpolationPolinom();
         test.interpolasiInputFile("1.txt");
         test.persamaanPolinom();
-        test.interpolasioutputFile("interpolasi.txt", 5);
+        test.interpolasioutputFile("interpolasi.txt", 0.2);
     }
 }
 
