@@ -1,4 +1,7 @@
 package lib.Solver;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.FileReader;
 import java.util.Scanner;
 import lib.Matrix.Matrix;
 import lib.Solver.SPL_Balikan;
@@ -6,7 +9,9 @@ import lib.Solver.SPL_Balikan;
 public class interpolationBicubic {
     Matrix matriksInput = new Matrix();
     Matrix matriks = new Matrix();
+    String persamaan;
     double a,b;
+
     public void inputMatrix() {
         /*
          * Mengisi Matriks dan Nilai yang dicari dengan inputan user
@@ -47,15 +52,64 @@ public class interpolationBicubic {
         }
         matriks.col = 16;
         matriks.row = 16;
+        //Create inverse
         matriks.Display();
-        System.out.printf("--------------------------------------------------------------");
-        //Ubah menjadi Matriks Inverse
-        SPL_Balikan.Balikan(matriks);
-        matriks.Display();
+
+    }
+
+    public void inputMatrixFile(String filename) {
+        /*
+         * Mengisi Matriks dan Nilai yang dicari dengan inputan file
+         * I.S. Matriks terdefinisi
+         * F.S. Matriks dan Nilai terisi dengan inputan file
+         */
+        try {
+            FileReader file = new FileReader("test/"+filename);
+            BufferedReader br = new BufferedReader(file);
+            String line;
+            int row = 0;
+            while ((line = br.readLine()) != null) {
+                String[] temp = line.split(" ");
+                if (row <4){
+                    for (int i = 0; i < temp.length; i++) {
+                        matriksInput.array[row][i] = Double.parseDouble(temp[i]);
+                    }
+                }else{
+                    a = Double.parseDouble(temp[0]);
+                    b = Double.parseDouble(temp[1]);
+                }
+                row++;
+            }
+            br.close();
+            matriksInput.row = row-1;
+            matriksInput.col = row-1;
+        }
+        catch (Exception e) {
+            System.out.println("File tidak ditemukan");
+            System.out.println(e);
+        }
+    }
+
+    public void outputMatrixFile(String filename) {
+        /*
+         * Menulis hasil interpolasi ke file
+         * I.S. Sembarang
+         * F.S. Terbentuk file interpolasi.txt
+         */
+        try {
+            FileWriter file = new FileWriter("hasil/"+filename);
+            file.write(this.persamaan);
+            file.write("\n");
+            file.close();
+        }
+        catch (Exception e) {
+            System.out.println("File tidak ditemukan");
+            System.out.println(e);
+        }
     }
         public static void main(String[] args) {
         interpolationBicubic interpolasi = new interpolationBicubic();
-        interpolasi.persamaanInterpolasi();
+        interpolasi.inputMatrixFile("2.txt");
         }
     }
 
