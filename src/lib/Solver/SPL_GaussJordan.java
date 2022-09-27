@@ -7,8 +7,9 @@ public class SPL_GaussJordan {
         int idx;
         double pengurang;
         idx=1;
-        int [] nol = new int[10];
-        while(!solver.Eselon() || idx<solver.row){
+        int [] nol = new int[5000];
+        
+        while(!solver.Eselon() && idx<solver.row){
             for(int i=0;i<solver.row;i++){
                 nol[i]=solver.CheckZero(i);
             }
@@ -23,6 +24,7 @@ public class SPL_GaussJordan {
                         nol[i]=temp1;
 
                         solver.SwapBaris(i, j);
+                        solver.mintoZero();
                         System.out.printf("Tukar matriks indeks ke-%d dengan indeks ke-%d\n",i+1,j+1);
                         solver.Display();
                         System.out.println();
@@ -43,6 +45,7 @@ public class SPL_GaussJordan {
 
                         }
                         solver.KaliMatriks(1/solver.array[idx-1][j], idx-1);
+                        solver.mintoZero();
                         solver.Display();
                         System.out.println();
                     }
@@ -81,9 +84,14 @@ public class SPL_GaussJordan {
                                 System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,-pengurang,idx);
                             }
                         }
-                        for(int j=acuan;j<solver.col;j++){
-                            solver.array[i][j]-=pengurang*solver.array[idx-1][j];
-                        }
+                        solver.KurangmMatriks(i, idx-1, pengurang);
+                        // for(int j=acuan;j<solver.col;j++){
+                        //     if(solver.array[i][j]!=0){
+                        //         solver.array[i][j]=solver.array[i][j]-pengurang*solver.array[idx-1][j];
+                        //     }
+                        //     // solver.array[i][j]-=pengurang*solver.array[idx-1][j];
+                        // }
+                        solver.mintoZero();
                         solver.Display();
                         System.out.println();
                         
@@ -110,13 +118,14 @@ public class SPL_GaussJordan {
 
                     }
                     solver.KaliMatriks(1/solver.array[idx-1][j], idx-1);
+                    solver.mintoZero();
                     solver.Display();
                     System.out.println();
                 }
             }
         }
 
-        boolean [] sol = new boolean[100];
+        boolean [] sol = new boolean[5000];
         for(int i=0;i<solver.row;i++){
             boolean cek=true;
             for(int j=0;j<solver.col-1;j++){
@@ -139,9 +148,9 @@ public class SPL_GaussJordan {
             System.out.println("Solusi tidak ada\n");
         }
         else{
-            String [] Solution = new String[100];
-            String [] PS = new String[100];
-            for(int i=0;i<100;i++){
+            String [] Solution = new String[5000];
+            String [] PS = new String[5000];
+            for(int i=0;i<5000;i++){
                 PS[i]="";
                 Solution[i]="";
             }
@@ -183,6 +192,7 @@ public class SPL_GaussJordan {
                                     }
                                 }
                                 solver.KurangmMatriks(k, i, solver.array[k][j]);
+                                solver.mintoZero();
                                 solver.Display();
                                 System.out.println();
                             }
@@ -191,6 +201,7 @@ public class SPL_GaussJordan {
                 }
             }
             // Display();
+            solver.mintoZero();
             for(int i=0;i<solver.row;i++){
                 boolean cek=true;
                 for(int j=0;j<solver.col-1;j++){
@@ -221,21 +232,24 @@ public class SPL_GaussJordan {
                                 banyaksolusi++;
                             }
                         }
-                        if(solver.array[i][solver.col-1]==0 && banyaksolusi==0){
-                            Solution[j]+=String.format("0.00");
-                        }
-                        else if(solver.array[i][solver.col-1]>0){
+                        //masalah
+                        
+                        if(solver.array[i][solver.col-1]>0){
                             if(banyaksolusi==0){
-                                Solution[j]+=String.format("%f",solver.array[i][solver.col-1]/solver.array[i][j]);
+                                Solution[j]+=String.format("%.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
 
                             }
                             else{
-                                Solution[j]+=String.format("+ %f",solver.array[i][solver.col-1]/solver.array[i][j]);
+                                Solution[j]+=String.format("+ %.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
 
                             }
                         }
+                        else if(solver.array[i][solver.col-1]<0){
+                            Solution[j]+=String.format("- %.2f",-solver.array[i][solver.col-1]/solver.array[i][j]);
+                        }
                         else{
-                            Solution[j]+=String.format("- %f",-solver.array[i][solver.col-1]/solver.array[i][j]);
+                            if(Solution[j]==""){
+                                Solution[j]+="0.00";                            }
                         }
                     }
                 }
@@ -256,6 +270,9 @@ public class SPL_GaussJordan {
     public static void main(String[] args) {
         Matrix a = new Matrix();
         a.IsiMatriks();
+        // a.Hasil_OBE();
         SPL_GaussJordan.Jordan(a);
+        // System.out.println();
+        // a.Display();
     }
 }

@@ -10,7 +10,7 @@ public class SPL_Gauss {
         int idx;
         double pengurang;
         idx=1;
-        int [] nol = new int[1000];
+        int [] nol = new int[5000];
         while(!solver.Eselon() || idx<solver.row){
             for(int i=0;i<solver.row;i++){
                 nol[i]=solver.CheckZero(i);
@@ -26,6 +26,7 @@ public class SPL_Gauss {
                         nol[i]=temp1;
 
                         solver.SwapBaris(i, j);
+                        solver.mintoZero();
                         System.out.printf("Tukar matriks indeks ke-%d dengan indeks ke-%d\n",i+1,j+1);
                         solver.Display();
                         System.out.println();
@@ -46,7 +47,7 @@ public class SPL_Gauss {
             if(acuan!=-1){
                 for(int i=idx;i<solver.row;i++){
                     pengurang=solver.array[i][acuan]/solver.array[idx-1][acuan];
-                    if(pengurang!=0){
+                    if(pengurang!=0.0){
                         if(pengurang>0.0){
                             if(solver.array[i][acuan]==solver.array[idx-1][acuan]){
     
@@ -66,9 +67,8 @@ public class SPL_Gauss {
                             }
                         }
                         // System.out.printf("R%d -> R%d + %.2f*R%d\n",i+1,i+1,pengurang,idx);
-                        for(int j=acuan;j<solver.col;j++){
-                            solver.array[i][j]-=pengurang*solver.array[idx-1][j];
-                        }
+                        solver.KurangmMatriks(i, idx-1, pengurang);
+                        solver.mintoZero();
                         solver.Display();
                         System.out.println();
                         
@@ -78,11 +78,12 @@ public class SPL_Gauss {
             idx++;            
         }
         System.out.println("Diperoleh hasil matriks :\n");
+        solver.mintoZero();
         solver.Display();
 
         
 
-        boolean [] sol = new boolean[1000];
+        boolean [] sol = new boolean[5000];
         for(int i=0;i<solver.row;i++){
             boolean cek=true;
             for(int j=0;j<solver.col-1;j++){
@@ -105,9 +106,9 @@ public class SPL_Gauss {
             System.out.println("Solusi tidak ada\n");
         }
         else{
-            String [] Solution = new String[100];
-            String [] PS = new String[100];
-            for(int i=0;i<100;i++){
+            String [] Solution = new String[5000];
+            String [] PS = new String[5000];
+            for(int i=0;i<5000;i++){
                 PS[i]="";
                 Solution[i]="";
             }
@@ -168,7 +169,7 @@ public class SPL_Gauss {
                 }
             }
 
-            for(int i=0;i<100;i++){
+            for(int i=0;i<5000;i++){
                 PS[i]="";
                 Solution[i]="";
             }
@@ -179,7 +180,7 @@ public class SPL_Gauss {
             // solusi x1,x2,x3,...
             System.out.println("ngurangi jordan\n");
             
-            for(int i=0;i<100;i++){
+            for(int i=0;i<5000;i++){
                 PS[i]="";
                 Solution[i]="";
             }
@@ -241,21 +242,22 @@ public class SPL_Gauss {
                                 banyaksolusi++;
                             }
                         }
-                        if(solver.array[i][solver.col-1]==0 && banyaksolusi==0){
-                            Solution[j]+=String.format("0.00");
-                        }
-                        else if(solver.array[i][solver.col-1]>0){
+                        if(solver.array[i][solver.col-1]>0){
                             if(banyaksolusi==0){
-                                Solution[j]+=String.format("%f",solver.array[i][solver.col-1]/solver.array[i][j]);
+                                Solution[j]+=String.format("%.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
 
                             }
                             else{
-                                Solution[j]+=String.format("+ %f",solver.array[i][solver.col-1]/solver.array[i][j]);
+                                Solution[j]+=String.format("+ %.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
 
                             }
                         }
+                        else if(solver.array[i][solver.col-1]<0){
+                            Solution[j]+=String.format("- %.2f",-solver.array[i][solver.col-1]/solver.array[i][j]);
+                        }
                         else{
-                            Solution[j]+=String.format("- %f",-solver.array[i][solver.col-1]/solver.array[i][j]);
+                            if(Solution[j]==""){
+                                Solution[j]+="0.00";                            }
                         }
                     }
                 }
