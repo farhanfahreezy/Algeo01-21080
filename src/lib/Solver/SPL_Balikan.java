@@ -26,7 +26,7 @@ public class SPL_Balikan {
         }
 
         // Melakukan GaussJordan sehingga matrix indentitas berpindah ke kiri
-        inverse2.SPL_GaussJordan();
+        SPL_GaussJordan.Jordan(inverse2);
 
         //inverse2.Display();
 
