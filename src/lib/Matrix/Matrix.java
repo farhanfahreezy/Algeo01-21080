@@ -460,7 +460,7 @@ public class Matrix {
         int idx;
         double pengurang;
         idx=1;
-        int [] nol = new int[10];
+        int [] nol = new int[100];
         while(!Eselon() || idx<this.row){
             for(int i=0;i<this.row;i++){
                 nol[i]=CheckZero(i);
