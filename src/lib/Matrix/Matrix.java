@@ -379,11 +379,4 @@ public class Matrix {
             }
         }
     }
-    public static void main(String[] args) {
-        Matrix a = new Matrix();
-        a.IsiMatriks();
-        // a.SPL_GaussJordan();
-        // a.Display();
-        a.SPL_Gauss();
-    }
 }
