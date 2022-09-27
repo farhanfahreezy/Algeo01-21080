@@ -386,6 +386,7 @@ public class Matrix {
         }
     }
 
+    // Melakukan transpose matrix
     public static void copyMatrix(Matrix Min, Matrix Mout){
         Mout.row = Min.row;
         Mout.col = Min.col;
@@ -422,6 +423,18 @@ public class Matrix {
             }
         }
         return m3;
+    }
+    
+    // Melakukan transpose matrix
+    public static void transpose(Matrix Min){
+        Matrix M2 = new Matrix();
+        copyMatrix(Min, M2);
+        int i,j;
+        for(i=0;i<Min.row;i++){
+            for(j=0;j<Min.col;j++){
+                Min.array[i][j]=M2.array[j][i];
+            }
+        }
     }
     public static void main(String[] args) {
         Matrix a = new Matrix();
