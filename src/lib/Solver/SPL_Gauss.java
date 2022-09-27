@@ -270,11 +270,11 @@ public class SPL_Gauss {
                 System.out.println("Solusi banyak\n");
             }
         }
-            
-            
-        
-        
-
+    }
+    public static void main(String[] args) {
+        Matrix a = new Matrix();
+        a.IsiMatriks();
+        SPL_Gauss.Gauss(a);
     }
     
 }
