@@ -42,7 +42,7 @@ public class IO {
             FileWriter file = new FileWriter("test/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             for (int i = 0; i < array.length; i++) {
-                bw.write("x"+i+1+" = "+array[i]);
+                bw.write(array[i]);
                 bw.newLine();
             }
             bw.close();
@@ -69,7 +69,7 @@ public class IO {
         
     }
     public static void main(String[] args) throws IOException {
-        
+
     }
 }
 

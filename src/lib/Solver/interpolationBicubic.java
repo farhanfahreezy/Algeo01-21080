@@ -53,6 +53,7 @@ public class interpolationBicubic {
         matriks.col = 16;
         matriks.row = 16;
         //Create inverse
+        SPL_Balikan.Balikan(matriks);
         matriks.Display();
 
     }
@@ -109,7 +110,7 @@ public class interpolationBicubic {
     }
         public static void main(String[] args) {
         interpolationBicubic interpolasi = new interpolationBicubic();
-        interpolasi.inputMatrixFile("2.txt");
+        interpolasi.persamaanInterpolasi();
         }
     }
 

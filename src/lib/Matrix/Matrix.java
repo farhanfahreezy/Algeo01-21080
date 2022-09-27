@@ -405,6 +405,24 @@ public class Matrix {
             }
         }
     }
+    public Matrix KaliMatrix(Matrix m1,Matrix m2) {
+       /*
+        * Spesifikasi Fungsi : menerima masukan matriks m1 dan m2, mengalikan matriks m1 dan m2, dan mengembalikan hasil perkalian matriks tersebut
+        */
+        Matrix m3 = new Matrix();
+        m3.row = m1.row;
+        m3.col = m2.col;
+        int i,j,k;
+        for(i=0;i<m1.row;i++){
+            for(j=0;j<m2.col;j++){
+                m3.array[i][j]=0;
+                for(k=0;k<m1.col;k++){
+                    m3.array[i][j]+=m1.array[i][k]*m2.array[k][j];
+                }
+            }
+        }
+        return m3;
+    }
     public static void main(String[] args) {
         Matrix a = new Matrix();
         a.IsiMatriks();
