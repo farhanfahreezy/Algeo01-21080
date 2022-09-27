@@ -6,6 +6,7 @@ public class Matrix {
     public double [][] array= new double[1000][1000] ;
     public int row;
     public int col;
+    public double peubahDeterminan = 1.0;
 
     // Method
 
@@ -87,6 +88,7 @@ public class Matrix {
 
     // menukar matriks indeks ke-x dengan matriks indeks ke-y
     public void SwapBaris(int x,int y){
+        this.peubahDeterminan*=-1;
         for(int i=0;i<this.col;i++){
             double temp;
             temp=this.array[x][i];
@@ -184,6 +186,7 @@ public class Matrix {
 
     // mengalikan seluruh baris pada matriks indeks ke-index dengan pengali
     public void KaliMatriks(double pengali,int index){
+        this.peubahDeterminan*=pengali;
         for(int i=0;i<this.col;i++){
             if(this.array[index][i]!=0.0){
                 this.array[index][i]*=pengali;
@@ -266,7 +269,7 @@ public class Matrix {
 
             // menjadikan index awal menjadi 1
             
-            idx++;            
+            idx++;  
         }
         //menjadikan 1
         boolean cek2=true;
