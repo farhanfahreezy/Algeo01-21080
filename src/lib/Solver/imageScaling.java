@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 public class imageScaling {
     BufferedImage image = null;
+    BufferedImage output = null;
     int width;
     int height;
     
@@ -29,13 +30,13 @@ public class imageScaling {
 
     }
 
-    public void outputImage() {
+    public void perbesarGambar() {
         /*
-         * Output gambar
+         * Perbesar gambar
          * I.S : Gambar terdefinisi
-         * F.S : Gambar teroutput
+         * F.S : Gambar diperbesar
          */
-        BufferedImage output = new BufferedImage(this.width*2, this.height*2, BufferedImage.TYPE_INT_ARGB);
+        this.output = new BufferedImage(this.width*2, this.height*2, BufferedImage.TYPE_INT_ARGB);
         for (int i=0; i<this.width; i++) {
             for (int j=0; j<this.height; j++) {
                 Color c = new Color(this.image.getRGB(i, j));
@@ -50,9 +51,16 @@ public class imageScaling {
                 output.setRGB(i*2+1, j*2+1, newColor.getRGB());
             }
         }
+    }
+    public void outputImage() {
+        /*
+         * Output gambar
+         * I.S : Gambar terdefinisi
+         * F.S : Gambar teroutput
+         */
         try {
             File file = new File("hasil/output.png");
-            ImageIO.write(output, "png", file);
+            ImageIO.write(this.output, "png", file);
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");
             e.printStackTrace();
@@ -61,6 +69,7 @@ public class imageScaling {
     public static void main(String[] args) {
         imageScaling img = new imageScaling();
         img.inputImage("albert.png");
+        img.perbesarGambar();
         img.outputImage();
     }
 }
