@@ -15,16 +15,18 @@ public class IO {
         try {
             FileReader file = new FileReader("test/"+filename);
             BufferedReader br = new BufferedReader(file);
-            String line = br.readLine();    // read first line 
+            String line = br.readLine();  
             int row = 0;
             while (line != null) {
                 String[] temp = line.split(" ");
+                matriks.col = temp.length;
                 for (int i = 0; i < temp.length; i++) {
                     matriks.array[row][i] = Double.parseDouble(temp[i]);
                 }
                 row++;
                 line = br.readLine();
             }
+            matriks.row = row;
             br.close();
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");
@@ -69,7 +71,9 @@ public class IO {
         
     }
     public static void main(String[] args) throws IOException {
-
+        Matrix matriks = new Matrix();
+        matriks = inputMatrixFile("2.txt");
+        matriks.Display();
     }
 }
 
