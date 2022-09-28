@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.util.Scanner;
 import lib.Matrix.Matrix;
-import lib.Solver.SPL_Balikan;
+import java.lang.Math;
 
 public class interpolationBicubic {
     Matrix matriksInput = new Matrix();

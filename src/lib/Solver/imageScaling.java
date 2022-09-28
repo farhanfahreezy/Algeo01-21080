@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import lib.Matrix.Matrix;
+
 public class imageScaling {
     BufferedImage image = null;
     BufferedImage output = null;
@@ -28,6 +30,16 @@ public class imageScaling {
             e.printStackTrace();
         }
 
+    }
+
+    public void partisiGambar(int i,int j) {
+        /*
+         * Mengambil 4 x 4 pixel dari gambar dan mengubahnya menjadi matriks 4 x 4 
+         * I.S. : Gambar terdefinisi
+         * F.S. : Matriks terdefinisi
+         */
+        Matrix matriks = new Matrix();
+        
     }
 
     public void perbesarGambar() {
