@@ -21,7 +21,7 @@ public class SPL_Balikan {
         inverse3.col = inverse.col;
         inverse2.col*=2;
 
-        if(Determinan.DET_Reduksi_Baris_Kofaktor(inverse)!=0.0){
+        if(Determinan.DET_Gauss(inverse)!=0.0){
             for(i=0;i<inverse.row;i++){
                 for(j=inverse.col;j<inverse2.col;j++){
                     if(i==(j-inverse.col)){
@@ -61,7 +61,7 @@ public class SPL_Balikan {
         Matrix esrevni = new Matrix();
 
         // ALGORITMA
-        det = Determinan.DET_Reduksi_Baris_Kofaktor(inverse);
+        det = Determinan.DET_Gauss(inverse);
         esrevni.row = inverse.row;
         esrevni.col = inverse.col;
 
@@ -105,7 +105,7 @@ public class SPL_Balikan {
                                 }
                             }
                         }
-                        esrevni.array[i][j]=tanda*(Determinan.DET_Reduksi_Baris_Kofaktor(MatKof));
+                        esrevni.array[i][j]=tanda*(Determinan.DET_Gauss(MatKof));
                         tanda*=-1;
                     }
                 }
@@ -119,18 +119,19 @@ public class SPL_Balikan {
         return esrevni;
     }
 
-    // public static void main(String[] args){
-    //     Matrix a = new Matrix();
-    //     Matrix b = new Matrix();
-    //     Matrix c = new Matrix();
-    //     a = IO.inputMatrixFile("3.txt");
-    //     b = INV_GaussJordan(a);
-    //     c = Balikan_SPL(a);
-    //     System.out.println("Hasil sebelum inverse adalah :");
-    //     a.Display();
-    //     System.out.println("Hasil inverse adalah :");
-    //     b.Display();
-    //     System.out.println("Hasil inverse adalah :");
-    //     c.Display();
-    // }
+    public static void main(String[] args){
+        Matrix a = new Matrix();
+        Matrix b = new Matrix();
+        Matrix c = new Matrix();
+        int ukuran = 16;
+        a.IsiMatriks(ukuran, ukuran);
+        b = INV_GaussJordan(a);
+        c = Balikan_SPL(a);
+        System.out.println("Hasil sebelum inverse adalah :");
+        a.Display();
+        System.out.println("Hasil inverse adalah :");
+        b.Display();
+        System.out.println("Hasil inverse adalah :");
+        c.Display();
+    }
 }
