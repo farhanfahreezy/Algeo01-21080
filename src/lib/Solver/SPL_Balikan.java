@@ -16,7 +16,9 @@ public class SPL_Balikan {
         // Membuat matrix augmented dari inverse
         Matrix inverse2 = new Matrix();
         Matrix inverse3 = new Matrix();
+
         Matrix.copyMatrix(inverse, inverse2);
+
         inverse3.row = inverse.row;
         inverse3.col = inverse.col;
         inverse2.col*=2;
@@ -43,6 +45,7 @@ public class SPL_Balikan {
                 }
             }
         }
+        inverse3.mintoZero();
         return inverse3;
     }
 
@@ -66,6 +69,7 @@ public class SPL_Balikan {
         esrevni.col = inverse.col;
 
         if(det!=0.0){
+            Matrix.copyMatrix(inverse, esrevni);
             if (inverse.row==2){
                 esrevni.array[0][0]=inverse.array[1][1];
                 esrevni.array[0][1]=(-1)*inverse.array[1][0];
@@ -116,22 +120,23 @@ public class SPL_Balikan {
                 
             }
         }
+        esrevni.mintoZero();
         return esrevni;
     }
 
-    public static void main(String[] args){
-        Matrix a = new Matrix();
-        Matrix b = new Matrix();
-        Matrix c = new Matrix();
-        int ukuran = 16;
-        a.IsiMatriks(ukuran, ukuran);
-        b = INV_GaussJordan(a);
-        c = Balikan_SPL(a);
-        System.out.println("Hasil sebelum inverse adalah :");
-        a.Display();
-        System.out.println("Hasil inverse adalah :");
-        b.Display();
-        System.out.println("Hasil inverse adalah :");
-        c.Display();
-    }
+    // public static void main(String[] args){
+    //     Matrix a = new Matrix();
+    //     Matrix b = new Matrix();
+    //     Matrix c = new Matrix();
+    //     int ukuran = 16;
+    //     a.IsiMatriks(ukuran, ukuran);
+    //     b = INV_GaussJordan(a);
+    //     c = Balikan_SPL(a);
+    //     System.out.println("Hasil sebelum inverse adalah :");
+    //     a.Display();
+    //     System.out.println("Hasil inverse adalah :");
+    //     b.Display();
+    //     System.out.println("Hasil inverse adalah :");
+    //     c.Display();
+    // }
 }

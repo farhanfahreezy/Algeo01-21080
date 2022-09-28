@@ -81,14 +81,18 @@ public class Determinan {
         double det=1.0;
         int i;
 
-        DetMat.Hasil_OBE();
+        Matrix DetMatBerubah = new Matrix();
+
+        Matrix.copyMatrix(DetMat, DetMatBerubah);
+
+        DetMatBerubah.Hasil_OBE();
         
-        for(i=0;i<DetMat.row;i++){
-            det*=DetMat.array[i][i];
+        for(i=0;i<DetMatBerubah.row;i++){
+            det*=DetMatBerubah.array[i][i];
         }
         // System.out.println(det);
         // System.out.println(DetMat.peubahDeterminan);
-        det = det/DetMat.peubahDeterminan;
+        det = det/DetMatBerubah.peubahDeterminan;
         // System.out.println(det);
 
         return det;
