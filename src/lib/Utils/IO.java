@@ -13,18 +13,20 @@ public class IO {
          */
         Matrix matriks = new Matrix();
         try {
-            FileReader file = new FileReader(filename);
+            FileReader file = new FileReader("test/"+filename);
             BufferedReader br = new BufferedReader(file);
-            String line = br.readLine();    // read first line 
+            String line = br.readLine();  
             int row = 0;
             while (line != null) {
                 String[] temp = line.split(" ");
+                matriks.col = temp.length;
                 for (int i = 0; i < temp.length; i++) {
                     matriks.array[row][i] = Double.parseDouble(temp[i]);
                 }
                 row++;
                 line = br.readLine();
             }
+            matriks.row = row;
             br.close();
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");
@@ -39,7 +41,7 @@ public class IO {
          * F.S. array ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("test/"+filename);
+            FileWriter file = new FileWriter("hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             for (int i = 0; i < array.length; i++) {
                 bw.write(array[i]);
@@ -58,7 +60,7 @@ public class IO {
          * F.S. det ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("test/"+filename);
+            FileWriter file = new FileWriter("hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             bw.write("Determinan: "+det);
             bw.close();
@@ -69,7 +71,9 @@ public class IO {
         
     }
     public static void main(String[] args) throws IOException {
-
+        Matrix matriks = new Matrix();
+        matriks = inputMatrixFile("2.txt");
+        matriks.Display();
     }
 }
 
