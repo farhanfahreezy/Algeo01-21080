@@ -1,6 +1,7 @@
 package lib.Solver;
 
 import lib.Matrix.Matrix;
+import lib.Utils.IO;
 
 public class SPL_Balikan {
 
@@ -65,7 +66,7 @@ public class SPL_Balikan {
         esrevni.row = inverse.row;
         esrevni.col = inverse.col;
 
-        if(Determinan.DET_Reduksi_Baris_Kofaktor(inverse)!=0.0){
+        if(det!=0.0){
             if (inverse.row==2){
                 esrevni.array[0][0]=inverse.array[1][1];
                 esrevni.array[0][1]=(-1)*inverse.array[1][0];
@@ -123,7 +124,7 @@ public class SPL_Balikan {
     //     Matrix a = new Matrix();
     //     Matrix b = new Matrix();
     //     Matrix c = new Matrix();
-    //     a.IsiMatriks();
+    //     a = IO.inputMatrixFile("3.txt");
     //     b = INV_GaussJordan(a);
     //     c = Balikan_SPL(a);
     //     System.out.println("Hasil sebelum inverse adalah :");
