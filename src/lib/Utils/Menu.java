@@ -2,6 +2,10 @@ package lib.Utils;
 
 import java.util.Scanner;
 
+import lib.Matrix.Matrix;
+import lib.Solver.SPL_Gauss;
+import lib.Solver.SPL_GaussJordan;
+
 public class Menu {
     public static void mainMenu() {   
         System.out.println("====================================");
@@ -56,9 +60,21 @@ public class Menu {
                     if (pilihan2.equals("y")) {
                         System.out.println("Input File");
                     } else if (pilihan2.equals("n")) {
+                        // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        int baris=input.nextInt();
+                        int kolom=input.nextInt();
+
+                        //inisiasi matriks
+                        Matrix result = new Matrix();
+                        result.IsiMatriks(baris, kolom);
+
+                        //eksekusi
+                        SPL_Gauss.Gauss(result);
+                
+                        
                     } else {
-                        System.out.println("Input salah");
+                        System.out.println("Input salah, mohon masukkan sesuai format");
                     }
                     System.out.println(pilihan2);
                     } while (!pilihan2.equals("y")|| !pilihan2.equals("n"));
@@ -72,7 +88,17 @@ public class Menu {
                     if (pilihan3.equals("y")) {
                         System.out.println("Input File");
                     } else if (pilihan3.equals("n")) {
+                        // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        int baris=input.nextInt();
+                        int kolom=input.nextInt();
+
+                        //inisiasi matriks
+                        Matrix result = new Matrix();
+                        result.IsiMatriks(baris, kolom);
+
+                        //eksekusi
+                        SPL_GaussJordan.Jordan(result);
                     } else {
                         System.out.println("Input salah");
                     }
@@ -87,7 +113,17 @@ public class Menu {
                     if (pilihan4.equals("y")) {
                         System.out.println("Input File");
                     } else if (pilihan4.equals("n")) {
+                        // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        int baris=input.nextInt();
+                        int kolom=input.nextInt();
+
+                        //inisiasi matriks
+                        Matrix result = new Matrix();
+                        result.IsiMatriks(baris, kolom);
+
+                        //eksekusi
+                        SPL_Gauss.Gauss(result);
                     } else {
                         System.out.println("Input salah");
                     }
