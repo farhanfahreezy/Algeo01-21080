@@ -39,7 +39,7 @@ public class IO {
          * F.S. array ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("test/"+filename);
+            FileWriter file = new FileWriter("hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             for (int i = 0; i < array.length; i++) {
                 bw.write(array[i]);
@@ -58,7 +58,7 @@ public class IO {
          * F.S. det ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("test/"+filename);
+            FileWriter file = new FileWriter("hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             bw.write("Determinan: "+det);
             bw.close();
