@@ -19,13 +19,8 @@ public class Matrix {
         }
     }
     // input matriks dengan n baris dan m kolom
-    public void IsiMatriks(){
+    public void IsiMatriks(int baris,int kolom){
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("Masukkan baris: ");
-        int baris = scanner.nextInt();
-        System.out.printf("Masukkan kolom: ");
-        int kolom = scanner.nextInt();
-
         this.row=baris;
         this.col=kolom;
 
@@ -149,24 +144,10 @@ public class Matrix {
         for(int i=0;i<this.row;i++){
             for(int j=0;j<this.col;j++){
                 if(j==0){
-                    if(this.array[i][j]==0.0){
-                        System.out.printf("%f",this.array[i][j]);
-
-                    }
-                    else{
-                        System.out.printf("%f",this.array[i][j]);
-
-                    }
+                    System.out.printf("%.2f",this.array[i][j]);
                 }
                 else{
-                    if(this.array[i][j]==-0.000000){
-                        System.out.printf(" %f",this.array[i][j]);
-
-                    }
-                    else{
-                        System.out.printf(" %f",this.array[i][j]);
-
-                    }
+                    System.out.printf(" %.2f",this.array[i][j]);
                 }
             }
             System.out.println();
@@ -440,17 +421,220 @@ public class Matrix {
             }
         }
     }
+    public static String[] SolusiSPL(Matrix solver){
+        String [] Solution = new String[solver.col];
+        String [] PS = new String[solver.col];
+        boolean [] sol = new boolean[solver.col];
+
+        for(int i=0;i<solver.row;i++){
+            boolean cek=true;
+            for(int j=0;j<solver.col-1;j++){
+                if(solver.array[i][j]!=0 && cek){
+                    // System.out.printf("%d %d\n",i,j);
+                    sol[j]=true;
+                    cek=false;
+                }
+            }
+        }
+        
+        for(int i=0;i<solver.col;i++){
+            PS[i]="";
+            Solution[i]="";
+        }
+        // System.out.printf("terdapat %d solusi\n",sumsol);
+        for(int i=0;i<solver.col-1;i++){
+            Solution[i]+='X'+Integer.toString(i+1)+" = ";
+        }
+        for(int i=0;i<solver.col-1;i++){
+            PS[i]='X'+Integer.toString(i+1);
+            if(!sol[i]){
+                // System.out.printf("%d gaada solusi\n",i+1);
+                Solution[i]+='X'+Integer.toString(i+1);
+                // System.out.println(Solution[i]);
+            }
+        }
+
+        
+        // Display();
+        solver.mintoZero();
+        for(int i=0;i<solver.row;i++){
+            boolean cek=true;
+            for(int j=0;j<solver.col-1;j++){
+                if(solver.array[i][j]!=0 && cek){
+                    cek=false;
+                    int banyaksolusi=0;
+                    for(int k=j+1;k<solver.col-1;k++){
+                        if(solver.array[i][k]!=0){
+                            if(banyaksolusi==0){
+                                // Solution[j]+=PS[k]+" = ";
+                                if(solver.array[i][k]==-1){
+                                    Solution[j]+=PS[k]+' ';
+                                }
+                                else if(solver.array[i][k]==1){
+                                    Solution[j]+='-'+PS[k]+' ';
+                                }
+                                else{
+                                    Solution[j]+=String.format("%.3f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
+                                }
+                            }
+                            else{
+                                if(solver.array[i][k]<0){
+                                    Solution[j]+="+ "+String.format("%.3f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
+                                }
+                                else{
+                                    Solution[j]+=String.format("%.3f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
+                                }
+                            }
+                            banyaksolusi++;
+                        }
+                    }
+                    //masalah
+                    
+                    if(solver.array[i][solver.col-1]>0){
+                        if(banyaksolusi==0){
+                            Solution[j]+=String.format("%.3f",solver.array[i][solver.col-1]/solver.array[i][j]);
+
+                        }
+                        else{
+                            Solution[j]+=String.format("+ %.3f",solver.array[i][solver.col-1]/solver.array[i][j]);
+
+                        }
+                    }
+                    else if(solver.array[i][solver.col-1]<0){
+                        Solution[j]+=String.format("- %.3f",-solver.array[i][solver.col-1]/solver.array[i][j]);
+                    }
+                    else{
+                        if(Solution[j]==""){
+                            Solution[j]+="0.00";
+                        }
+                    }
+                }
+            }
+        }
+        if(!solver.CheckSolution()){
+            for(int i=0;i<solver.col-1;i++){
+                Solution[i]="Tidak Terdefinisi";
+            }
+        }
+        return Solution;
+        
+    }
+    public void DisplaySolution(){
+
+        // inisiasi ada solusi atau solusi banyak
+        boolean [] sol = new boolean[5000];
+
+        // mengecek ada solusi atau tidak
+        for(int i=0;i<this.row;i++){
+            boolean cek=true;
+            for(int j=0;j<this.col-1;j++){
+                if(this.array[i][j]!=0 && cek){
+                    sol[j]=true;
+                    cek=false;
+                }
+            }
+        }
+        
+        // int sumsol;
+        // sumsol=0;
+        // for(int i=0;i<this.col-1;i++){
+        //     if(sol[i]){
+        //         sumsol++;
+        //     }
+        // }
+        if(!this.CheckSolution()){
+            System.out.println("Solusi tidak ada\n");
+        }
+        else{
+            System.out.println("Solusi dari persamaan diatas adalah: ");
+            // inisiasi hasil solusi dalam bentuk string
+            String [] Solution = new String[5000];
+            String [] PS = new String[5000];
+            for(int i=0;i<5000;i++){
+                PS[i]="";
+                Solution[i]="";
+            }
+
+            for(int i=0;i<this.col-1;i++){
+                PS[i]='X'+Integer.toString(i+1);
+                if(!sol[i]){
+                    Solution[i]+='X'+Integer.toString(i+1);
+                }
+            }
+
+            // Display();
+            for(int i=0;i<this.row;i++){
+                boolean cek=true;
+                for(int j=0;j<this.col-1;j++){
+                    if(this.array[i][j]!=0 && cek){
+                        cek=false;
+                        int banyaksolusi=0;
+                        for(int k=j+1;k<this.col-1;k++){
+                            if(this.array[i][k]!=0){
+                                if(banyaksolusi==0){
+                                    if(this.array[i][k]==-1){
+                                        Solution[j]+=PS[k]+' ';
+                                    }
+                                    else if(this.array[i][k]==1){
+                                        Solution[j]+='-'+PS[k]+' ';
+                                    }
+                                    else{
+                                        Solution[j]+=String.format("%.2f",-1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
+                                    }
+                                }
+                                else{
+                                    if(this.array[i][k]<0){
+                                        Solution[j]+="+ "+String.format("%.2f",-1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
+                                    }
+                                    else{
+                                        Solution[j]+="- "+String.format("%.2f",1*this.array[i][k]/this.array[i][j])+'*'+PS[k]+' ';
+                                    }
+                                }
+                                banyaksolusi++;
+                            }
+                        }
+                        //masalah
+                        
+                        if(this.array[i][this.col-1]>0){
+                            if(banyaksolusi==0){
+                                Solution[j]+=String.format("%.2f",this.array[i][this.col-1]/this.array[i][j]);
+
+                            }
+                            else{
+                                Solution[j]+=String.format("+ %.2f",this.array[i][this.col-1]/this.array[i][j]);
+
+                            }
+                        }
+                        else if(this.array[i][this.col-1]<0){
+                            Solution[j]+=String.format("- %.2f",-this.array[i][this.col-1]/this.array[i][j]);
+                        }
+                        else{
+                            if(Solution[j]==""){
+                                Solution[j]+="0.00";                            }
+                        }
+                    }
+                }
+            }
+            for(int i=0;i<this.col-1;i++){
+                System.out.printf("X%d = %s\n",i+1,Solution[i]);
+            }
+            // if(sumsol==this.col-1){
+            //     System.out.println("Solusi unik\n");
+            // }
+            // else{
+            //     System.out.println("Solusi banyak\n");
+            // }
+        }
+    }
     public static void main(String[] args) {
         Matrix a = new Matrix();
-        a.IsiMatriks();
-        a.KurangmMatriks(0, 1, -1);
-        a.KaliMatriks(-1, 2);
-        a.Display();
-        a.mintoZero();
-        a.Display();
-        double aa=0.0;
-        aa*=-1;
-        System.out.printf("%f",aa);
+        String [] b = new String[100];
+        a.IsiMatriks(3,4);
+        a.Hasil_OBE();
+        b=SolusiSPL(a);
+        for(int i=0;i<b.length;i++){
+            System.out.println(b[i]);
+        }
         // a.SPL_GaussJordan();
         // a.Display();
         

@@ -148,22 +148,6 @@ public class SPL_GaussJordan {
             System.out.println("Solusi tidak ada\n");
         }
         else{
-            String [] Solution = new String[5000];
-            String [] PS = new String[5000];
-            for(int i=0;i<5000;i++){
-                PS[i]="";
-                Solution[i]="";
-            }
-            // System.out.printf("terdapat %d solusi\n",sumsol);
-            for(int i=0;i<solver.col-1;i++){
-                PS[i]='X'+Integer.toString(i+1);
-                if(!sol[i]){
-                    // System.out.printf("%d gaada solusi\n",i+1);
-                    Solution[i]+='X'+Integer.toString(i+1);
-                    // System.out.println(Solution[i]);
-                }
-            }
-
             System.out.println("ngurangi jordan\n");
             for(int i=solver.row-1;i>=0;i--){
                 boolean cek=true;
@@ -201,75 +185,14 @@ public class SPL_GaussJordan {
                 }
             }
             // Display();
-            solver.mintoZero();
-            for(int i=0;i<solver.row;i++){
-                boolean cek=true;
-                for(int j=0;j<solver.col-1;j++){
-                    if(solver.array[i][j]!=0 && cek){
-                        cek=false;
-                        int banyaksolusi=0;
-                        for(int k=j+1;k<solver.col-1;k++){
-                            if(solver.array[i][k]!=0){
-                                if(banyaksolusi==0){
-                                    if(solver.array[i][k]==-1){
-                                        Solution[j]+=PS[k]+' ';
-                                    }
-                                    else if(solver.array[i][k]==1){
-                                        Solution[j]+='-'+PS[k]+' ';
-                                    }
-                                    else{
-                                        Solution[j]+=String.format("%.2f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
-                                    }
-                                }
-                                else{
-                                    if(solver.array[i][k]<0){
-                                        Solution[j]+="+ "+String.format("%.2f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
-                                    }
-                                    else{
-                                        Solution[j]+=String.format("%.2f",-1*solver.array[i][k]/solver.array[i][j])+'*'+PS[k]+' ';
-                                    }
-                                }
-                                banyaksolusi++;
-                            }
-                        }
-                        //masalah
-                        
-                        if(solver.array[i][solver.col-1]>0){
-                            if(banyaksolusi==0){
-                                Solution[j]+=String.format("%.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
-
-                            }
-                            else{
-                                Solution[j]+=String.format("+ %.2f",solver.array[i][solver.col-1]/solver.array[i][j]);
-
-                            }
-                        }
-                        else if(solver.array[i][solver.col-1]<0){
-                            Solution[j]+=String.format("- %.2f",-solver.array[i][solver.col-1]/solver.array[i][j]);
-                        }
-                        else{
-                            if(Solution[j]==""){
-                                Solution[j]+="0.00";                            }
-                        }
-                    }
-                }
-            }
-            for(int i=0;i<solver.col-1;i++){
-                System.out.printf("X%d = %s\n",i+1,Solution[i]);
-            }
-            if(sumsol==solver.col-1){
-                System.out.println("Solusi unik\n");
-            }
-            else{
-                System.out.println("Solusi banyak\n");
-            }
+            solver.DisplaySolution();
         }
         
 
     }
     public static void main(String[] args) {
         Matrix a = new Matrix();
-        a.IsiMatriks();
+        a.IsiMatriks(9,16);
         // a.Hasil_OBE();
         SPL_GaussJordan.Jordan(a);
         // System.out.println();
