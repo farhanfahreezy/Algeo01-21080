@@ -13,7 +13,7 @@ public class IO {
          */
         Matrix matriks = new Matrix();
         try {
-            FileReader file = new FileReader(filename);
+            FileReader file = new FileReader("test/"+filename);
             BufferedReader br = new BufferedReader(file);
             String line = br.readLine();    // read first line 
             int row = 0;
