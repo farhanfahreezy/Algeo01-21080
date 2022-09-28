@@ -82,24 +82,23 @@ public class Determinan {
         int i;
 
         DetMat.Hasil_OBE();
-        DetMat.Display();
         
         for(i=0;i<DetMat.row;i++){
             det*=DetMat.array[i][i];
         }
-        System.out.println(det);
-        System.out.println(DetMat.peubahDeterminan);
+        // System.out.println(det);
+        // System.out.println(DetMat.peubahDeterminan);
         det = det/DetMat.peubahDeterminan;
-        System.out.println(det);
+        // System.out.println(det);
 
         return det;
     }
-    public static void main(String[] args) {
-        Matrix a = new Matrix();
-        a.IsiMatriks();
-        double determinan = DET_Reduksi_Baris_Kofaktor(a);
-        double det2 = DET_Gauss(a);
-        System.out.println("Hasil determinan1 adalah : " + determinan);
-        System.out.println("Hasil determinan1 adalah : " + det2);
-    }
+    // public static void main(String[] args) {
+    //     Matrix a = new Matrix();
+    //     a.IsiMatriks();
+    //     double determinan = DET_Reduksi_Baris_Kofaktor(a);
+    //     double det2 = DET_Gauss(a);
+    //     System.out.println("Hasil determinan1 adalah : " + determinan);
+    //     System.out.println("Hasil determinan1 adalah : " + det2);
+    // }
 }
