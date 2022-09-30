@@ -56,9 +56,9 @@ public class SPL_Cramer {
         }
         
     }
-    // public static void main(String[] args) {
-    //     Matrix a = new Matrix();
-    //     a.IsiMatriks();
-    //     Cramer(a);
-    // }
+    public static void main(String[] args) {
+        Matrix a = new Matrix();
+        a.IsiMatriks(3,4);
+        Cramer(a);
+    }
 }
