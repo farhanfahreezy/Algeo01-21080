@@ -60,19 +60,23 @@ public class Menu {
                 switch (pilihan2) {
                     /* Metode Eliminasi Gauss */
                     case 1 :
-                        String pilihan3;
+                        String solution[];
+                        String pilihan3,filename;
                         Scanner myobj2 = new Scanner(System.in);
+                        Scanner myobj3 = new Scanner(System.in);
+                        Scanner myobj4 = new Scanner(System.in);
+                        Scanner myobj5 = new Scanner(System.in);
                         do {
                             System.out.print("input file? (y/n): ");
                             pilihan3 = myobj2.nextLine();
                             if ((!pilihan3.equals("y") && !pilihan3.equals("n"))  && (!pilihan3.equals("Y") && !pilihan3.equals("N"))) {
                                 System.out.println("Pilihan tidak tersedia");
-                        }
+                            }
                         }while((!pilihan3.equals("y") && !pilihan3.equals("n"))  && (!pilihan3.equals("Y") && !pilihan3.equals("N")));
                         Matrix inp = new Matrix();
                         if (pilihan3.equals("y") || pilihan3.equals("Y")) {
                             System.out.println("Masukkan nama file : ");
-                            String filename = myobj.nextLine();
+                            filename = myobj4.nextLine();
                             inp = IO.inputMatrixFile(filename);
                         } else {
                             int baris,kolom;
@@ -85,23 +89,41 @@ public class Menu {
                         }
                         System.out.print("\n");
                         SPL_Gauss.Gauss(inp);
+                        solution = Matrix.SolusiSPL(inp);
+                        System.out.print("\n");
+                        do {
+                            System.out.print("output file? (y/n): ");
+                            pilihan3 = myobj3.nextLine();
+                            if ((!pilihan3.equals("y") && !pilihan3.equals("n"))  && (!pilihan3.equals("Y") && !pilihan3.equals("N"))) {
+                                System.out.println("Pilihan tidak tersedia");
+                            }
+                        }while((!pilihan3.equals("y") && !pilihan3.equals("n"))  && (!pilihan3.equals("Y") && !pilihan3.equals("N")));
+                        if (pilihan3.equals("y") || pilihan3.equals("Y")) {
+                            System.out.println("Masukkan nama file : ");
+                            filename = myobj5.nextLine();
+                            IO.outputOBEFile(filename, solution);
+                        } 
                         break;
                     /* Metode Eliminasi Gauss-Jordan */
                     case 2 :
-                        String pilihan4;
-                        Scanner myobj3 = new Scanner(System.in);
+                        String solution2[];
+                        String pilihan4,filename2;
+                        Scanner myobj6 = new Scanner(System.in);
+                        Scanner myobj7 = new Scanner(System.in);
+                        Scanner myobj8 = new Scanner(System.in);
+                        Scanner myobj9 = new Scanner(System.in);
                         do {
                             System.out.print("input file? (y/n): ");
-                            pilihan4 = myobj3.nextLine();
+                            pilihan4 = myobj6.nextLine();
                             if ((!pilihan4.equals("y") && !pilihan4.equals("n"))  && (!pilihan4.equals("Y") && !pilihan4.equals("N"))) {
                                 System.out.println("Pilihan tidak tersedia");
-                        }
+                            }
                         }while((!pilihan4.equals("y") && !pilihan4.equals("n"))  && (!pilihan4.equals("Y") && !pilihan4.equals("N")));
                         Matrix inp2 = new Matrix();
                         if (pilihan4.equals("y") || pilihan4.equals("Y")) {
                             System.out.println("Masukkan nama file : ");
-                            String filename = myobj.nextLine();
-                            inp2 = IO.inputMatrixFile(filename);
+                            filename2 = myobj8.nextLine();
+                            inp2 = IO.inputMatrixFile(filename2);
                         } else {
                             int baris,kolom;
                             System.out.println("Masukkan ukuran matriks");
@@ -113,6 +135,20 @@ public class Menu {
                         }
                         System.out.print("\n");
                         SPL_GaussJordan.Jordan(inp2);
+                        solution2 = Matrix.SolusiSPL(inp2);
+                        System.out.print("\n");
+                        do {
+                            System.out.print("output file? (y/n): ");
+                            pilihan4 = myobj7.nextLine();
+                            if ((!pilihan4.equals("y") && !pilihan4.equals("n"))  && (!pilihan4.equals("Y") && !pilihan4.equals("N"))) {
+                                System.out.println("Pilihan tidak tersedia");
+                            }
+                        }while((!pilihan4.equals("y") && !pilihan4.equals("n"))  && (!pilihan4.equals("Y") && !pilihan4.equals("N")));
+                        if (pilihan4.equals("y") || pilihan4.equals("Y")) {
+                            System.out.println("Masukkan nama file : ");
+                            filename2 = myobj9.nextLine();
+                            IO.outputOBEFile(filename2, solution2);
+                        }
                         break;
                     case 3 :
                     
