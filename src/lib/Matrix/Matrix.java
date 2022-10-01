@@ -80,7 +80,27 @@ public class Matrix {
         }
         return res;
     }
-
+    
+    // mengecek apakah matriks kosong
+    public boolean isEmpty(){
+        boolean kosong=true;
+        int i=0;
+        int j=0;
+        while(kosong && i<this.row){
+            if(this.array[i][j]!=0.0){
+                kosong=false;
+            }else{
+                if(j==this.col-1){
+                    i++;
+                    j=0;
+                }else{
+                    j=0;
+                }
+            }
+        }
+        return kosong;
+    }
+    
     // menukar matriks indeks ke-x dengan matriks indeks ke-y
     public void SwapBaris(int x,int y){
         this.peubahDeterminan*=-1;
