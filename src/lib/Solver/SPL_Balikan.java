@@ -123,9 +123,48 @@ public class SPL_Balikan {
         esrevni.mintoZero();
         return esrevni;
     }
-    public static void main() {
+    
+    public static void Hasil_INV(Matrix Axb){
+        /* I.S. Matrix NxN+1 terdefinisi dengan bentuk Ax=b, baris = N , kolom = N+1 */
+        /* F.S  Solusi dari x dengan metode x = A^-1 * b*/
         
+        // KAMUS LOKAL
+        int i,j;
+        Matrix Ax = new Matrix();
+        Ax.row = Axb.row;
+        Ax.col = Axb.row;
+        Matrix invAx = new Matrix();
+        Matrix b = new Matrix();
+        b.row = Axb.row;
+        b.col = 1;
+        Matrix hasil = new Matrix();
+        hasil.row = Axb.row;
+        hasil.col = 1;
+
+        // ALGORITMA
         
+        // isi Matrix Ax ukuran NxN
+        for(i=0;i<Ax.row;i++){
+            for(j=0;j<Ax.col;j++){
+                Ax.array[i][j]=Axb.array[i][j];
+            }
+        }
+        // isi Matrix b ukuran Nx1
+        for(i=0;i<Ax.row;i++){
+            b.array[i][0]=Axb.array[i][Axb.col-1];
+        }
+        // balikan dari Ax
+        invAx = INV_GaussJordan(Ax);
+
+        if(!invAx.isEmpty()){
+            // hasil perkalian invAx dan b
+            hasil = Matrix.KaliMatrix(invAx, b);
+            for(i=0;i<hasil.row;i++){
+                System.out.println("X"+(i+1)+": "+hasil.array[i][0]);
+            }
+        } else{
+            System.out.println("Tidak ada penyelesaian");
+        }
     }
     // public static void main(String[] args){
     //     Matrix a = new Matrix();
