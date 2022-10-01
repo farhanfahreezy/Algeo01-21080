@@ -30,7 +30,6 @@ public class IO {
             br.close();
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");
-            e.printStackTrace();
         }
         return matriks;
     }
@@ -69,6 +68,27 @@ public class IO {
             System.out.println(e);
             }
         
+    }
+    public static void outputInversFile(String filename,Matrix matriks) {
+        /*
+         * Spesifikasi Fungsi : Menulis hasil invers ke dalam file
+         * I.S. matriks terdefinisi
+         * F.S. matriks ditulis ke dalam file
+         */
+        try {
+            FileWriter file = new FileWriter("hasil/"+filename);
+            BufferedWriter bw = new BufferedWriter(file);
+            for (int i = 0; i < matriks.row; i++) {
+                for (int j = 0; j < matriks.col; j++) {
+                    bw.write(String.format("%.3f", matriks.array[i][j])+" ");
+                }
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("File tidak ditemukan");
+            System.out.println(e);
+            }
     }
     public static void main(String[] args) throws IOException {
         Matrix matriks = new Matrix();

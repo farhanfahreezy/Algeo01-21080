@@ -11,6 +11,7 @@ import java.lang.Math;
 public class interpolationPolinom {
     Matrix point = new Matrix();
     int N;
+    double nilaiTaksir;
     double [] konstanta = new double [N];
     String persamaan;
     public void interpolasiInput(){
@@ -36,7 +37,8 @@ public class interpolationPolinom {
                 }
             }
         }
-        this.point.Display();
+        System.out.println("Nilai yang ingin ditaksir: ");
+        this.nilaiTaksir = myobj.nextDouble();
         myobj.close();
     }
     
@@ -81,16 +83,16 @@ public class interpolationPolinom {
         }
         System.out.println(this.persamaan);
     }
-    public String nilaiTaksir(double x){
+    public String nilaiTaksir(){
         /*
          * Spesifikasi Fungsi : diberikan nilai x, menghasilkan nilai taksiran dari x
          */
         double sum = 0;
         for (int i=0;i<this.N;i++){
-            sum = sum + this.konstanta[i]*Math.pow(x,i);
+            sum = sum + this.konstanta[i]*Math.pow(this.nilaiTaksir,i);
         }
-        System.out.printf("P(%.2f) = %.2f\n",x,sum);
-        return String.format("P(%.2f) = %.2f\n",x,sum);
+        System.out.printf("P(%.2f) = %.2f\n",this.nilaiTaksir,sum);
+        return String.format("P(%.2f) = %.2f\n",this.nilaiTaksir,sum);
     }
     public void interpolasiInputFile(String filename){
         /*
@@ -106,8 +108,12 @@ public class interpolationPolinom {
             int i = 0;
             while (line != null){
                 String [] data = line.split(" ");
-                for (int j=0;j<data.length;j++){
-                    temp.array[i][j] = Double.parseDouble(data[j]);
+                if (data.length == 2){
+                    for (int j=0;j<data.length;j++){
+                        temp.array[i][j] = Double.parseDouble(data[j]);
+                    }
+                }else{
+                    this.nilaiTaksir = Double.parseDouble(data[0]);
                 }
                 line = br.readLine();
                 i = i + 1;
@@ -131,7 +137,7 @@ public class interpolationPolinom {
             System.out.println(e);
         }
     }
-    public void interpolasioutputFile(String filename, double x){
+    public void interpolasioutputFile(String filename){
         /*
          * Menulis hasil interpolasi ke file
          * I.S. Sembarang
@@ -141,7 +147,7 @@ public class interpolationPolinom {
             FileWriter file = new FileWriter("hasil/"+filename);
             file.write(this.persamaan);
             file.write("\n");
-            file.write(nilaiTaksir(x));
+            file.write(nilaiTaksir());
             file.close();
         }
         catch(Exception e){
@@ -154,7 +160,6 @@ public class interpolationPolinom {
         interpolationPolinom test = new interpolationPolinom();
         test.interpolasiInputFile("1.txt");
         test.persamaanPolinom();
-        test.interpolasioutputFile("interpolasi.txt", 0.2);
     }
 }
 

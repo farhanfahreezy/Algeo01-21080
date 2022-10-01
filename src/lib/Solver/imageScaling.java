@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
+import javax.imageio.ImageIO;
 import lib.Matrix.Matrix;
 
 public class imageScaling {
@@ -13,13 +13,21 @@ public class imageScaling {
     BufferedImage output = null;
     int width;
     int height;
+    Matrix matriksRed = new Matrix();
+    Matrix matriksGreen = new Matrix();
+    Matrix matriksBlue = new Matrix();
+    Matrix matriksAlpha = new Matrix();
+    double red;
+    double green;
+    double blue;
+    double alpha;
     
     public void inputImage(String filename) {
         /*
-         * Input gambar
-         * I.S : Gambar terdefinisi
-         * F.S : Gambar terinput
-         */
+        * Input gambar
+        * I.S : Gambar terdefinisi
+        * F.S : Gambar terinput
+        */
         try {
             File file = new File("test/"+filename);
             this.image = ImageIO.read(file);
@@ -29,17 +37,80 @@ public class imageScaling {
             System.out.println("File tidak ditemukan");
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void partisiGambar(int i,int j) {
+        
         /*
          * Mengambil 4 x 4 pixel dari gambar dan mengubahnya menjadi matriks 4 x 4 
          * I.S. : Gambar terdefinisi
          * F.S. : Matriks terdefinisi
          */
-        Matrix matriks = new Matrix();
-        
+        this.matriksRed.row = 4;
+        this.matriksRed.col = 4;
+
+        this.matriksGreen.row = 4;
+        this.matriksGreen.col = 4;
+
+        this.matriksBlue.row = 4;
+        this.matriksBlue.col = 4;
+
+        this.matriksAlpha.row = 4;
+        this.matriksAlpha.col = 4;
+
+        for (int k = 0; k < 4; k++) {
+            for (int l = 0; l < 4; l++) {
+                Color c = new Color(image.getRGB(i+k, j+l));
+                this.matriksRed.array[k][l] =   c.getRed();
+                this.matriksGreen.array[k][l] = c.getGreen();
+                this.matriksBlue.array[k][l] = c.getBlue();
+                this.matriksAlpha.array[k][l] = c.getAlpha();
+            }
+        }
+        matriksRed.Display();
+        System.out.println("====================================");
+        matriksGreen.Display();
+        System.out.println("====================================");
+        matriksBlue.Display();
+        System.out.println("====================================");
+        matriksAlpha.Display();
+    }
+
+    public void hasilinterpolasiRGB(double row, double col) {
+        /*
+         * Mencari nilai interpolasi dari matriks matriksRed, matriksGreen, matriksBlue
+         * I.S. : Matriks terdefinisi
+         * F.S : Hasil Interpolasi terdefinisi
+         */
+        interpolationBicubic interpolasiRed = new interpolationBicubic();
+        interpolationBicubic interpolasiGreen = new interpolationBicubic();
+        interpolationBicubic interpolasiBlue = new interpolationBicubic();
+        interpolationBicubic interpolasiAlpha = new interpolationBicubic();
+
+        interpolasiRed.matriksInput = this.matriksRed;
+        interpolasiGreen.matriksInput = this.matriksGreen;
+        interpolasiBlue.matriksInput = this.matriksBlue;
+        interpolasiAlpha.matriksInput = this.matriksAlpha;
+
+        interpolasiBlue.a = col;
+        interpolasiBlue.b = row;
+        interpolasiRed.a = col;
+        interpolasiRed.b = row;
+        interpolasiGreen.a = col;
+        interpolasiGreen.b = row;
+        interpolasiAlpha.a = col;
+        interpolasiAlpha.b = row;
+
+        interpolasiRed.hasilBicubicInterpolasi();
+        interpolasiGreen.hasilBicubicInterpolasi();
+        interpolasiBlue.hasilBicubicInterpolasi();
+        interpolasiAlpha.hasilBicubicInterpolasi();
+
+        this.red =  Math.round(interpolasiRed.hasilInterpolasi);
+        this.green =  Math.round(interpolasiGreen.hasilInterpolasi);
+        this.blue = Math.round(interpolasiBlue.hasilInterpolasi);
+        this.alpha =  Math.round(interpolasiAlpha.hasilInterpolasi);
     }
 
     public void perbesarGambar() {
@@ -57,10 +128,10 @@ public class imageScaling {
                 int blue = (int)(c.getBlue());
                 int alpha = (int)(c.getAlpha());
                 Color newColor = new Color(red, green, blue, alpha);
-                output.setRGB(i*2, j*2, newColor.getRGB());
-                output.setRGB(i*2+1, j*2, newColor.getRGB());
-                output.setRGB(i*2, j*2+1, newColor.getRGB());
-                output.setRGB(i*2+1, j*2+1, newColor.getRGB());
+                this.output.setRGB(i*2, j*2, newColor.getRGB());
+                this.output.setRGB(i*2+1, j*2, newColor.getRGB());
+                this.output.setRGB(i*2, j*2+1, newColor.getRGB());
+                this.output.setRGB(i*2+1, j*2+1, newColor.getRGB());
             }
         }
     }
@@ -81,7 +152,11 @@ public class imageScaling {
     public static void main(String[] args) {
         imageScaling img = new imageScaling();
         img.inputImage("albert.png");
-        img.perbesarGambar();
-        img.outputImage();
+        img.partisiGambar(0,0);
+        img.hasilinterpolasiRGB(0.5, 0);
+        System.out.println(img.red);
+        System.out.println(img.green);
+        System.out.println(img.blue);
+        System.out.println(img.alpha);
     }
 }
