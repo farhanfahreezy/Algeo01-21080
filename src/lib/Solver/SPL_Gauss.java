@@ -1,6 +1,6 @@
 package lib.Solver;
 
-import java.util.Scanner;
+import java.util.*;
 
 import lib.Matrix.Matrix;
 import lib.Utils.IO;
@@ -9,6 +9,7 @@ import lib.Utils.IO;
  * SPL_Gauss
  */
 public class SPL_Gauss {
+
     public static void Gauss(Matrix solver){
         int idx;
         double pengurang;
@@ -200,6 +201,8 @@ public class SPL_Gauss {
     }
     public static void main() {
         Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
         String file ;
         String[] solusi;
         Matrix solver = new Matrix();
@@ -214,31 +217,22 @@ public class SPL_Gauss {
             }
         else{
             System.out.print("Masukkan jumlah m: ");
-            int m = input.nextInt();
+            int m = input3.nextInt();
             System.out.print("Masukkan jumlah n: ");
-            int n = input.nextInt();
+            int n = input2.nextInt();
             solver.IsiMatriks(m, n);
             }
             Gauss(solver);
             solusi = Matrix.SolusiSPL(solver);
-            do{
-                System.out.print("Output file (y/n) : ");
-                while (!input.hasNextLine()) {
-                    file = input.nextLine();
-                }
-            }
-            while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
-            if(file.equals("y") || file.equals("Y")){
-                System.out.print("Masukkan nama file (filename.txt): ");
-                String filename = input.nextLine();
-                IO.outputOBEFile(filename, solusi);
-            }
-
-    }
-    public static void main(String[] args) {
-        Matrix a = new Matrix();
-        a.IsiMatriks(9,16);
-        SPL_Gauss.Gauss(a);
-    }
-    
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputOBEFile(filename, solusi);
+        }
+    }    
 }

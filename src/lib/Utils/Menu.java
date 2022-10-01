@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import lib.Matrix.Matrix;
 import lib.Solver.Determinan;
+import lib.Solver.RLB;
 import lib.Solver.SPL_Balikan;
 import lib.Solver.SPL_Cramer;
 import lib.Solver.SPL_Gauss;
@@ -77,239 +78,105 @@ public class Menu {
             /* Sistem Persamaan Linier */
             case 1:
                 subMenuSPL();
-<<<<<<< HEAD
                 int pilihanSPL = input.nextInt();
                 switch(pilihanSPL) {
-=======
-                int pilihan2 ;
-                do{ pilihan2 = myobj.nextInt();
-                    if (pilihan2 < 1 || pilihan2 > 5) {
-                        System.out.println("Pilihan tidak tersedia");
-                        subMenuSPL();
-                    }
-<<<<<<< HEAD
-                    System.out.println(pilihan2);
-                    } while (!pilihan2.equals("y")|| !pilihan2.equals("n"));
-                    break;
-                case 2:
-                    System.out.println("Metode Eliminasi Gauss-Jordan");
-                    String pilihan3;
-                    do{
-                        System.out.println("Input File (y/n): ");
-                        pilihan3 = input.next();
-                    if (pilihan3.equals("y")) {
-                        System.out.println("Input File");
-                        System.out.println("Masukkan nama file: ");
-                        String namaFile = input.next();
-                        Matrix res2 = new Matrix();
-                        res2=IO.inputMatrixFile(namaFile);
-                        
-                        SPL_GaussJordan.Jordan(res2);
-                    } else if (pilihan3.equals("n")) {
-                        // Masukin banyak baris dan kolom
-                        System.out.println("Input Manual");
-                        System.out.println("Masukkan banyak baris: ");
-                        int baris=input.nextInt();
-                        System.out.println("Masukkan banyak kolom: ");
-                        int kolom=input.nextInt();
-
-                        //inisiasi matriks
-                        Matrix res2 = new Matrix();
-                        res2.IsiMatriks(baris, kolom);
-
-                        //eksekusi
-                        SPL_GaussJordan.Jordan(res2);
-                    } else {
-                        System.out.println("Input salah");
-                    }
-                    } while (pilihan3 != "y" || pilihan3 != "n");
-                    break;
-                case 3:
-                    System.out.println("Metode Matriks Balikan");
-                    String pilihan4;
-                    do{
-                        System.out.println("Input File (y/n): ");
-                        pilihan4 = input.next();
-                        
-                    if (pilihan4.equals("y")) {
-                        System.out.println("Input File");
-                        System.out.println("Masukkan nama file: ");
-                        String namaFile = input.next();
-                        Matrix inp = new Matrix();
-                        inp=IO.inputMatrixFile(namaFile);
-                        while(inp.col!=inp.row){
-                            System.out.println("Matriks tidak persegi, mohon masukkan ulang");
-                            System.out.println("Masukkan nama file: ");
-                            namaFile = input.next();
-                            inp=IO.inputMatrixFile(namaFile);
-                        }
-                        Matrix res3 = new Matrix();
-                        res3=SPL_Balikan.INV_GaussJordan(inp);
-                        //eksekusi
-                        res3.Display();
-
-                    } else if (pilihan4.equals("n")) {
-                        // Masukin banyak baris dan kolom
-                        System.out.println("Input Manual");
-                        System.out.println("Masukkan banyak baris: ");
-                        int baris=input.nextInt();
-                        System.out.println("Masukkan banyak kolom: ");
-                        int kolom=input.nextInt();
-
-                        while(baris!=kolom){
-                            System.out.println("Input tidak sesuai, masukkan kembali");
-                            System.out.println("Masukkan banyak baris: ");
-                            baris=input.nextInt();
-                            System.out.println("Masukkan banyak kolom: ");
-                            kolom=input.nextInt();
-                        }
-
-                        //inisiasi matriks
-                        Matrix inp = new Matrix();
-                        inp.IsiMatriks(baris, kolom);
-
-                        Matrix res3 = new Matrix();
-                        res3=SPL_Balikan.INV_GaussJordan(inp);
-                        //eksekusi
-                        res3.Display();
-                    } else {
-                        System.out.println("Input salah");
-                    }
-                    } while (pilihan4 != "y" || pilihan4 != "n");
-                    break;
-                case 4:
-                    System.out.println("Kaidah Cramer");
-                    String pilihan5;
-                    do{
-                        System.out.println("Input File (y/n): ");
-                        pilihan5 = input.next();
-                    if (pilihan5.equals("y")) {
-                        System.out.println("Input File");
-                        System.out.println("Masukkan nama file: ");
-                        String namaFile = input.next();
-                        Matrix inp = new Matrix();
-                        inp=IO.inputMatrixFile(namaFile);
-                        while(inp.col!=inp.row+1){
-                            System.out.println("Matriks tidak persegi, mohon masukkan ulang");
-                            System.out.println("Masukkan nama file: ");
-                            namaFile = input.next();
-                            inp=IO.inputMatrixFile(namaFile);
-                        }
-                        SPL_Cramer.Cramer(inp);                        
-                        
-                    } else if (pilihan5.equals("n")) {
-                        System.out.println("Input Manual");
-                        System.out.println("Masukkan banyak baris: ");
-                        int baris=input.nextInt();
-                        System.out.println("Masukkan banyak kolom: ");
-                        int kolom=input.nextInt();
-
-                        while(baris+1!=kolom){
-                            System.out.println("Input tidak sesuai, masukkan kembali");
-                            System.out.println("Masukkan banyak baris: ");
-                            baris=input.nextInt();
-                            System.out.println("Masukkan banyak kolom: ");
-                            kolom=input.nextInt();
-                        }
-                        Matrix res = new Matrix();
-                        res.IsiMatriks(baris, kolom);
-                        SPL_Cramer.Cramer(res);
-                        
-                    } else {
-                        System.out.println("Input salah");
-                    }
-                    } while (pilihan5 != "y" || pilihan5 != "n");
-                    break;
-                case 5:
-                    System.out.println("\n");
-                    main();
-                    break;
-                default:
-                    System.out.println("Pilihan tidak ada");
-                    break;
-                }
-                break;
-            case 2:
-                System.out.println("Determinan");
-                subMenu();
-                int pilihan2 = input.nextInt();
-=======
-                }while(pilihan2 < 1 || pilihan2 > 5);
-    
->>>>>>> a3c039be7e9dd55158a2a916285489c96069e8ce
-                switch (pilihan2) {
->>>>>>> fcb0dd048bfb73a7378b08630cac6cf763176d15
-                    /* Metode Eliminasi Gauss */
                     case 1:
                         System.out.println("Metode Eliminasi Gauss");
                         SPL_Gauss.main();
+                        main();
                         break;
                     case 2:
-                        // SPL_GaussJordan.main();
+                        System.out.println("Metode Eliminasi Gauss-Jordan");
+                        SPL_GaussJordan.main();
+                        main();
                         break;
                     case 3:
-                        // SPL_Balikan.main();
+                        System.out.println("Metode Matriks Balikan");
+                        SPL_Balikan.main();
+                        main();
                         break;
                     case 4:
-                        // SPL_Cramer.main();
+                        System.out.println("Kaidah Cramer");
+                        SPL_Cramer.main();
                         break;
                     case 5:
                         main();
                         break;
                     default:
-                        System.out.println("Pilihan tidak ada");
+                        System.out.println("Pilihan tidak tersedia");
                         break;
                 }
                 break;
+            /* Determinan */
             case 2:
                 subMenuDet();
                 int pilihanDet = input.nextInt();
                 switch(pilihanDet) {
                     case 1:
-                        // Determinan.main();
+                        System.out.println("Metode Ekspansi Kofaktor");
+                        Determinan.mainKofaktor();
+                        main();
                         break;
                     case 2:
-                        // Determinan.main();
+                        System.out.println("Metode Eliminasi Gauss");
+                        Determinan.mainGauss();
+                        main();
                         break;
                     case 3:
                         main();
                         break;
                     default:
-                        System.out.println("Pilihan tidak ada");
+                        System.out.println("Pilihan tidak tersedia");
                         break;
                 }
                 break;
+            /* Matriks Balikan */
             case 3:
                 subMenuInverse();
                 int pilihanInverse = input.nextInt();
                 switch(pilihanInverse) {
                     case 1:
-                        // SPL_GaussJordan.main();
+                        System.out.println("Metode Eliminasi Gauss-Jordan");
+                        SPL_Balikan.mainInvGauss();
+                        main();
                         break;
                     case 2:
-                        // SPL_GaussJordan.main();
+                        System.out.println("Metode Adjoin");
+                        SPL_Balikan.mainInvAdj();
+                        main();
                         break;
                     case 3:
                         main();
                         break;
                     default:
-                        System.out.println("Pilihan tidak ada");
+                        System.out.println("Pilihan tidak tersedia");
                         break;
                 }
                 break;
+            /* Interpolasi Polinom */
             case 4:
-                // interpolationPolinom.main();
+                System.out.println("Interpolasi Polinom");
+                interpolationPolinom.main();
+                main();
                 break;
+            /* Interpolasi Bicubic */
             case 5:
-                // interpolationBicubic.main();
+                System.out.println("Interpolasi Bicubic");
+                interpolationBicubic.main();
+                main();
                 break;
+            /* Regresi Linear Berganda */
             case 6:
+                System.out.println("Regresi Linear Berganda");
+                RLB.main();
+                main();
                 break;
+            /* Keluar */
             case 7:
                 System.exit(0);
                 break;
             default:
-                System.out.println("Pilihan tidak ada");
+                System.out.println("Pilihan tidak tersedia");
                 main();
                 break;
         }

@@ -1,13 +1,14 @@
 package lib.Matrix;
 import java.util.Scanner;
 public class Matrix {
-
+    
     //Atribut
     public double [][] array= new double[1000][1000] ;
     public int row;
     public int col;
     public double peubahDeterminan = 1.0;
-
+    Scanner scanner = new Scanner(System.in);
+    
     // Method
 
     // Konstruktor
@@ -20,7 +21,6 @@ public class Matrix {
     }
     // input matriks dengan n baris dan m kolom
     public void IsiMatriks(int baris,int kolom){
-        Scanner scanner = new Scanner(System.in);
         this.row=baris;
         this.col=kolom;
 
@@ -29,7 +29,6 @@ public class Matrix {
                 this.array[i][j]=scanner.nextDouble();
             }
         }
-        scanner.close();
     }
     // mengecek banyak nol pada indeks awal
     public int CheckZero(int index){

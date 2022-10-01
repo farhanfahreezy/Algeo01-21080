@@ -52,7 +52,7 @@ public class IO {
             System.out.println(e);
             }
     }
-    public static void outputDeterminanFile(String filename,String det) {
+    public static void outputDeterminanFile(String filename,double det) {
         /*
          * Spesifikasi Fungsi : Menulis hasil determinan ke dalam file
          * I.S. det terdefinisi

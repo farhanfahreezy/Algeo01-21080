@@ -14,6 +14,9 @@ public class interpolationPolinom {
     double nilaiTaksir;
     double [] konstanta = new double [N];
     String persamaan;
+    Scanner myobj = new Scanner(System.in);
+    Scanner myobj2 = new Scanner(System.in);
+    Scanner myobj3 = new Scanner(System.in);
     public void interpolasiInput(){
         /*
          Membuat matriks dari masukan user
@@ -21,7 +24,6 @@ public class interpolationPolinom {
          F.S. Terbentuk Matriks
          */
         System.out.print("Masukkan Input N: ");
-        Scanner myobj = new Scanner(System.in);
         this.N = myobj.nextInt();
         this.point.col = this.N+1;
         this.point.row = this.N;
@@ -39,7 +41,6 @@ public class interpolationPolinom {
         }
         System.out.println("Nilai yang ingin ditaksir: ");
         this.nilaiTaksir = myobj.nextDouble();
-        myobj.close();
     }
     
     public void persamaanPolinom(){
@@ -62,25 +63,38 @@ public class interpolationPolinom {
         this.persamaan = "P(x) = ";
         //Print Persamaan Polinom
         for (int i = 0;i<this.N;i++){
-            if (i==0){
+            if (i==0 && solution[0] != 0){
             this.persamaan = this.persamaan+Double.toString(solution[i]);
+            }
+            else if(i==1){
+                if (solution[1] != 0 && solution[0] != 0){
+                    if (solution[1] == 1){
+                        this.persamaan = this.persamaan+" + X";
+                    }else if (solution[1] == -1){
+                        this.persamaan = this.persamaan+" - X";
+                    }else{
+                        this.persamaan = this.persamaan+" + "+Double.toString(solution[i])+" X";
+                    }
+                }else{
+                    this.persamaan = this.persamaan+Double.toString(solution[i])+" X";
+                }
             }
             else{
                 if (i != this.N){
                     if (solution[i] != 0 && solution[i]!=1){
                         if (solution[i]>0){
                             this.persamaan = this.persamaan+" + "+Double.toString(solution[i])+" X^"+Integer.toString(i);
+                        }else if (i==1){
+                            this.persamaan = this.persamaan+Double.toString(solution[i])+"X";
                         }else{
                             this.persamaan = this.persamaan+" - "+Double.toString(-1*solution[i])+" X^"+Integer.toString(i);
                         }
                     }else if (solution[i] == 1 && i!=1){
                         this.persamaan = this.persamaan+" + X^"+Integer.toString(i);
-                    }else if (solution[i] == 1 && i==1){
-                        this.persamaan = this.persamaan+" + X";
                     }
-                }
             }
         }
+    }
         System.out.println(this.persamaan);
     }
     public String nilaiTaksir(){
@@ -156,10 +170,36 @@ public class interpolationPolinom {
         }
 
     }
-    public static void main(String[] args) {
-        interpolationPolinom test = new interpolationPolinom();
-        test.interpolasiInputFile("1.txt");
-        test.persamaanPolinom();
+    public static void main() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        interpolationPolinom polinom = new interpolationPolinom();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            polinom.interpolasiInputFile(filename);
+            }
+        else{
+            polinom.interpolasiInput();
+            }
+            polinom.persamaanPolinom();
+            polinom.nilaiTaksir();
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input2.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input3.nextLine();
+            polinom.interpolasioutputFile(filename);
+        }
     }
 }
 
