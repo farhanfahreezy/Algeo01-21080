@@ -123,7 +123,7 @@ public class SPL_Balikan {
         esrevni.mintoZero();
         return esrevni;
     }
-    
+
     public static void Hasil_INV(Matrix Axb){
         /* I.S. Matrix NxN+1 terdefinisi dengan bentuk Ax=b, baris = N , kolom = N+1 */
         /* F.S  Solusi dari x dengan metode x = A^-1 * b*/
@@ -149,21 +149,26 @@ public class SPL_Balikan {
                 Ax.array[i][j]=Axb.array[i][j];
             }
         }
+        System.out.println("1");
         // isi Matrix b ukuran Nx1
         for(i=0;i<Ax.row;i++){
             b.array[i][0]=Axb.array[i][Axb.col-1];
         }
+        System.out.println("2");
         // balikan dari Ax
         invAx = INV_GaussJordan(Ax);
+        System.out.println("3");
 
         if(!invAx.isEmpty()){
             // hasil perkalian invAx dan b
             hasil = Matrix.KaliMatrix(invAx, b);
+            System.out.println("Solusi dari persamaan diatas adalah");
             for(i=0;i<hasil.row;i++){
-                System.out.println("X"+(i+1)+": "+hasil.array[i][0]);
+                System.out.printf("X%d = %.2f\n", i+1,hasil.array[i][0]);
+                //System.out.println("X"+(i+1)+": "+hasil.array[i][0]);
             }
         } else{
-            System.out.println("Tidak ada penyelesaian");
+            System.out.println("Solusi tidak ada");
         }
     }
     // public static void main(String[] args){
