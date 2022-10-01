@@ -3,6 +3,8 @@ package lib.Utils;
 import java.util.Scanner;
 
 import lib.Matrix.Matrix;
+import lib.Solver.SPL_Balikan;
+import lib.Solver.SPL_Cramer;
 import lib.Solver.SPL_Gauss;
 import lib.Solver.SPL_GaussJordan;
 
@@ -57,20 +59,30 @@ public class Menu {
                     do{
                         System.out.println("Input File (y/n): ");
                         pilihan2 = input.next();
+
                     if (pilihan2.equals("y")) {
                         System.out.println("Input File");
+                        System.out.println("Masukkan nama file: ");
+                        String namaFile = input.next();
+                        Matrix res1 = new Matrix();
+                        res1=IO.inputMatrixFile(namaFile);
+
+                        SPL_Gauss.Gauss(res1);
+
                     } else if (pilihan2.equals("n")) {
                         // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        System.out.println("Masukkan banyak baris: ");
                         int baris=input.nextInt();
+                        System.out.println("Masukkan banyak kolom: ");
                         int kolom=input.nextInt();
 
                         //inisiasi matriks
-                        Matrix result = new Matrix();
-                        result.IsiMatriks(baris, kolom);
+                        Matrix res1 = new Matrix();
+                        res1.IsiMatriks(baris, kolom);
 
                         //eksekusi
-                        SPL_Gauss.Gauss(result);
+                        SPL_Gauss.Gauss(res1);
                 
                         
                     } else {
@@ -87,18 +99,26 @@ public class Menu {
                         pilihan3 = input.next();
                     if (pilihan3.equals("y")) {
                         System.out.println("Input File");
+                        System.out.println("Masukkan nama file: ");
+                        String namaFile = input.next();
+                        Matrix res2 = new Matrix();
+                        res2=IO.inputMatrixFile(namaFile);
+                        
+                        SPL_GaussJordan.Jordan(res2);
                     } else if (pilihan3.equals("n")) {
                         // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        System.out.println("Masukkan banyak baris: ");
                         int baris=input.nextInt();
+                        System.out.println("Masukkan banyak kolom: ");
                         int kolom=input.nextInt();
 
                         //inisiasi matriks
-                        Matrix result = new Matrix();
-                        result.IsiMatriks(baris, kolom);
+                        Matrix res2 = new Matrix();
+                        res2.IsiMatriks(baris, kolom);
 
                         //eksekusi
-                        SPL_GaussJordan.Jordan(result);
+                        SPL_GaussJordan.Jordan(res2);
                     } else {
                         System.out.println("Input salah");
                     }
@@ -110,20 +130,48 @@ public class Menu {
                     do{
                         System.out.println("Input File (y/n): ");
                         pilihan4 = input.next();
+                        
                     if (pilihan4.equals("y")) {
                         System.out.println("Input File");
+                        System.out.println("Masukkan nama file: ");
+                        String namaFile = input.next();
+                        Matrix inp = new Matrix();
+                        inp=IO.inputMatrixFile(namaFile);
+                        while(inp.col!=inp.row){
+                            System.out.println("Matriks tidak persegi, mohon masukkan ulang");
+                            System.out.println("Masukkan nama file: ");
+                            namaFile = input.next();
+                            inp=IO.inputMatrixFile(namaFile);
+                        }
+                        Matrix res3 = new Matrix();
+                        res3=SPL_Balikan.INV_GaussJordan(inp);
+                        //eksekusi
+                        res3.Display();
+
                     } else if (pilihan4.equals("n")) {
                         // Masukin banyak baris dan kolom
                         System.out.println("Input Manual");
+                        System.out.println("Masukkan banyak baris: ");
                         int baris=input.nextInt();
+                        System.out.println("Masukkan banyak kolom: ");
                         int kolom=input.nextInt();
 
-                        //inisiasi matriks
-                        Matrix result = new Matrix();
-                        result.IsiMatriks(baris, kolom);
+                        while(baris!=kolom){
+                            System.out.println("Input tidak sesuai, masukkan kembali");
+                            System.out.println("Masukkan banyak baris: ");
+                            baris=input.nextInt();
+                            System.out.println("Masukkan banyak kolom: ");
+                            kolom=input.nextInt();
+                        }
 
+                        //inisiasi matriks
+                        Matrix inp = new Matrix();
+                        inp.IsiMatriks(baris, kolom);
+
+                        Matrix res3 = new Matrix();
+                        res3=SPL_Balikan.INV_GaussJordan(inp);
                         //eksekusi
-                        SPL_Gauss.Gauss(result);
+                        res3.Display();
                     } else {
                         System.out.println("Input salah");
                     }
@@ -137,8 +185,33 @@ public class Menu {
                         pilihan5 = input.next();
                     if (pilihan5.equals("y")) {
                         System.out.println("Input File");
+                        System.out.println("Masukkan nama file: ");
+                        String namaFile = input.next();
+                        Matrix inp = new Matrix();
+                        inp=IO.inputMatrixFile(namaFile);
+                        while(inp.col!=inp.row+1){
+                            System.out.println("Matriks tidak persegi, mohon masukkan ulang");
+                            System.out.println("Masukkan nama file: ");
+                            namaFile = input.next();
+                            inp=IO.inputMatrixFile(namaFile);
+                        }
+                        SPL_Cramer.Cramer(inp);                        
+                        
                     } else if (pilihan5.equals("n")) {
                         System.out.println("Input Manual");
+                        System.out.println("Masukkan banyak baris: ");
+                        int baris=input.nextInt();
+                        System.out.println("Masukkan banyak kolom: ");
+                        int kolom=input.nextInt();
+
+                        while(baris+1!=kolom){
+                            System.out.println("Input tidak sesuai, masukkan kembali");
+                            System.out.println("Masukkan banyak baris: ");
+                            baris=input.nextInt();
+                            System.out.println("Masukkan banyak kolom: ");
+                            kolom=input.nextInt();
+                        }
+                        
                     } else {
                         System.out.println("Input salah");
                     }
