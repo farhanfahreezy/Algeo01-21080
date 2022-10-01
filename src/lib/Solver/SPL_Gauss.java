@@ -1,6 +1,9 @@
 package lib.Solver;
 
+import java.util.Scanner;
+
 import lib.Matrix.Matrix;
+import lib.Utils.IO;
 
 /**
  * SPL_Gauss
@@ -194,6 +197,43 @@ public class SPL_Gauss {
             }
             solver.DisplaySolution();
         }
+    }
+    public static void main() {
+        Scanner input = new Scanner(System.in);
+        String file ;
+        String[] solusi;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah m: ");
+            int m = input.nextInt();
+            System.out.print("Masukkan jumlah n: ");
+            int n = input.nextInt();
+            solver.IsiMatriks(m, n);
+            }
+            Gauss(solver);
+            solusi = Matrix.SolusiSPL(solver);
+            do{
+                System.out.print("Output file (y/n) : ");
+                while (!input.hasNextLine()) {
+                    file = input.nextLine();
+                }
+            }
+            while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+            if(file.equals("y") || file.equals("Y")){
+                System.out.print("Masukkan nama file (filename.txt): ");
+                String filename = input.nextLine();
+                IO.outputOBEFile(filename, solusi);
+            }
+
     }
     public static void main(String[] args) {
         Matrix a = new Matrix();

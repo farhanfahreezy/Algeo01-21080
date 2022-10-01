@@ -123,7 +123,10 @@ public class SPL_Balikan {
         esrevni.mintoZero();
         return esrevni;
     }
-
+    public static void main() {
+        
+        
+    }
     // public static void main(String[] args){
     //     Matrix a = new Matrix();
     //     Matrix b = new Matrix();
