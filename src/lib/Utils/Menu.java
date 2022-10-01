@@ -211,6 +211,9 @@ public class Menu {
                             System.out.println("Masukkan banyak kolom: ");
                             kolom=input.nextInt();
                         }
+                        Matrix res = new Matrix();
+                        res.IsiMatriks(baris, kolom);
+                        SPL_Cramer.Cramer(res);
                         
                     } else {
                         System.out.println("Input salah");
