@@ -10,6 +10,7 @@ public class interpolationBicubic {
     Matrix matriksInput = new Matrix();
     Matrix matriks = new Matrix();
     double a,b,hasilInterpolasi;
+    String persamaan;
 
     public void inputMatrix() {
         /*
@@ -68,30 +69,32 @@ public class interpolationBicubic {
         Matrix inverse = new Matrix();
         inverse.row = 16;
         inverse.col = 16;
-        inverse = SPL_Balikan.INV_GaussJordan(matriks);
+        inverse = SPL_Balikan.INV_GaussJordan(this.matriks);
         //Hasil kali inverse dengan matriks input
         Matrix hasilKali = new Matrix();
         hasilKali.row = 16;
         hasilKali.col = 1;
         hasilKali = Matrix.KaliMatrix(inverse, hasil);
+        this.persamaan = "P(x,y) = ";
         //Hasil interpolasi f(a,b)
         this.hasilInterpolasi = 0;
         k = 0;
         for (int j = 0;j<4;j++){
             for (int i = 0;i<4;i++){
+                this.persamaan += hasilKali.array[k][0]+"x^"+i+"y^"+j+" + ";
                 this.hasilInterpolasi = this.hasilInterpolasi + hasilKali.array[k][0]*Math.pow(this.a, i)*Math.pow(this.b, j);
                 k++;
             }
         }
-        System.out.printf("f(%.2f,%.2f) = %.3f",this.a,this.b,this.hasilInterpolasi);
+        System.out.println(this.persamaan);
     }
-
+    
     public void inputMatrixFile(String filename) {
         /*
-         * Mengisi Matriks dan Nilai yang dicari dengan inputan file
-         * I.S. Matriks terdefinisi
-         * F.S. Matriks dan Nilai terisi dengan inputan file
-         */
+        * Mengisi Matriks dan Nilai yang dicari dengan inputan file
+        * I.S. Matriks terdefinisi
+        * F.S. Matriks dan Nilai terisi dengan inputan file
+        */
         try {
             FileReader file = new FileReader("test/"+filename);
             BufferedReader br = new BufferedReader(file);
@@ -118,14 +121,15 @@ public class interpolationBicubic {
             System.out.println(e);
         }
     }
-
+    
     public void outputMatrixFile(String filename) {
         /*
-         * Menulis hasil interpolasi ke file
-         * I.S. Sembarang
-         * F.S. Terbentuk file interpolasi.txt
-         */
+        * Menulis hasil interpolasi ke file
+        * I.S. Sembarang
+        * F.S. Terbentuk file interpolasi.txt
+        */
         try {
+            System.out.println("f("+this.a+","+this.b+") = "+this.hasilInterpolasi);
             FileWriter file = new FileWriter("hasil/"+filename);
             file.write("f("+this.a+","+this.b+") = "+String.format("%.3f", this.hasilInterpolasi));
             file.close();
@@ -135,13 +139,12 @@ public class interpolationBicubic {
             System.out.println(e);
         }
     }
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         interpolationBicubic interpolasi = new interpolationBicubic();
         interpolasi.inputMatrixFile("2.txt");
         interpolasi.hasilBicubicInterpolasi();
-        interpolasi.outputMatrixFile("hasilbicubic.txt");
-
-        }
+        interpolasi.outputMatrixFile("interpolasi.txt");
     }
+}
 
 
