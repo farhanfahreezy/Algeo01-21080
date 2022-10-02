@@ -7,6 +7,7 @@ import lib.Solver.SPL_Balikan;
 import lib.Solver.SPL_Cramer;
 import lib.Solver.SPL_Gauss;
 import lib.Solver.SPL_GaussJordan;
+import lib.Solver.imageScaling;
 import lib.Solver.interpolationBicubic;
 import lib.Solver.interpolationPolinom;
 
@@ -26,7 +27,8 @@ public class Menu {
         System.out.println("= 4. Interpolasi Polinom           =");
         System.out.println("= 5. Interpolasi Bicubic           =");
         System.out.println("= 6. Regresi linear berganda       =");
-        System.out.println("= 7. Keluar                        =");
+        System.out.println("= 7. Perbesar Gambar               =");
+        System.out.println("= 8. Keluar                        =");
         System.out.println("=                                  =");
         System.out.println("====================================");
         System.out.print("Pilihan : ");
@@ -166,8 +168,14 @@ public class Menu {
                 RLB.main();
                 main();
                 break;
-            /* Keluar */
+            /* Perbesar Gambar */
             case 7:
+                System.out.println("Perbesar Gambar");
+                imageScaling.main();
+                main();
+                break;
+            /* Keluar */
+            case 8:
                 System.exit(0);
                 break;
             default:
