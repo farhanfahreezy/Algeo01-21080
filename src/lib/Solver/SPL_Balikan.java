@@ -1,6 +1,9 @@
 package lib.Solver;
 
+import java.util.Scanner;
+
 import lib.Matrix.Matrix;
+import lib.Utils.IO;
 
 public class SPL_Balikan {
 
@@ -124,6 +127,165 @@ public class SPL_Balikan {
         return esrevni;
     }
 
+    public static String[] Hasil_INV(Matrix Axb){
+        /* I.S. Matrix NxN+1 terdefinisi dengan bentuk Ax=b, baris = N , kolom = N+1 */
+        /* F.S  Solusi dari x dengan metode x = A^-1 * b*/
+        
+        // KAMUS LOKAL
+        int i,j;
+        Matrix Ax = new Matrix();
+        Ax.row = Axb.row;
+        Ax.col = Axb.row;
+        Matrix invAx = new Matrix();
+        Matrix b = new Matrix();
+        b.row = Axb.row;
+        b.col = 1;
+        Matrix hasil = new Matrix();
+        hasil.row = Axb.row;
+        hasil.col = 1;
+
+        // ALGORITMA
+        
+        // isi Matrix Ax ukuran NxN
+        for(i=0;i<Ax.row;i++){
+            for(j=0;j<Ax.col;j++){
+                Ax.array[i][j]=Axb.array[i][j];
+            }
+        }
+        
+        // isi Matrix b ukuran Nx1
+        for(i=0;i<Ax.row;i++){
+            b.array[i][0]=Axb.array[i][Axb.col-1];
+        }
+        
+        // balikan dari Ax
+        invAx = INV_GaussJordan(Ax);
+        
+        String solution[];
+
+        if(!invAx.isEmpty()){
+            // hasil perkalian invAx dan b
+            hasil = Matrix.KaliMatrix(invAx, b);
+            System.out.println("Solusi dari persamaan diatas adalah");
+            solution = new String[hasil.row];
+            for(i=0;i<hasil.row;i++){
+                solution[i] = "x"+(i+1)+" = "+hasil.array[i][0];
+                System.out.printf("X%d = %.2f\n", i+1,hasil.array[i][0]);
+                //System.out.println("X"+(i+1)+": "+hasil.array[i][0]);
+            }
+        } else{
+            solution = new String[1];
+            solution[0] = "Tidak memiliki solusi";
+            System.out.println("Solusi tidak ada");
+        }
+        return solution;
+    }
+    public static void main() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        String[] solusi;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah m: ");
+            int m = input3.nextInt();
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(m, n);
+            }
+            solusi = Hasil_INV(solver);
+            
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputOBEFile(filename, solusi);
+        }
+    }  
+    public static void mainInvGauss() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(n, n);
+            }
+            Matrix inv = new Matrix();
+            inv = INV_GaussJordan(solver);
+            System.out.println("Hasil invers Gauss Jordan");
+            inv.Display();
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputInversFile(filename, inv);
+        }
+    }   
+    public static void mainInvAdj() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(n, n);
+            }
+            Matrix inv = new Matrix();
+            inv = Balikan_SPL(solver);
+            System.out.println("Hasil invers Adjoin");
+            inv.Display();
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputInversFile(filename, inv);
+        }
+    }
     // public static void main(String[] args){
     //     Matrix a = new Matrix();
     //     Matrix b = new Matrix();

@@ -1,6 +1,9 @@
 package lib.Solver;
 
+import java.util.Scanner;
+
 import lib.Matrix.Matrix;
+import lib.Utils.IO;
 
 public class Determinan {
     public static double DET_Reduksi_Baris_Kofaktor(Matrix DetMat){
@@ -97,6 +100,74 @@ public class Determinan {
 
         return det;
     }
+    public static void mainKofaktor() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        String[] solusi;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(n, n);
+            }
+            double det = DET_Reduksi_Baris_Kofaktor(solver);
+            System.out.println("Determinan dengan metode reduksi baris kofaktor: "+det);
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputDeterminanFile(filename, det);
+        }
+    }
+    public static void mainGauss() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        String[] solusi;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(n, n);
+            }
+            double det = DET_Gauss(solver);
+            System.out.println("Determinan dengan metode Gauss: "+det);
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputDeterminanFile(filename, det);
+        }
+    }    
     // public static void main(String[] args) {
     //     Matrix a = new Matrix();
     //     a.IsiMatriks();

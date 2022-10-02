@@ -1,54 +1,63 @@
 package lib.Solver;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import lib.Matrix.Matrix;
 
 public class RLB {
+    Matrix solver = new Matrix();
     Scanner input = new Scanner(System.in);
-    public void RLB_Ganda(Matrix solver) {
+    Double nilaiTaksir[] = new Double[100];
+    int length;
+    String persamaan;
+    public void RLB_Ganda() {
+        this.solver.Display();
         float[][] arrayl = new float[1000][1000];
         int a;
-        a=solver.row;
+        a=this.solver.row;
 
-        for(int i=0;i<solver.col;i++){
-            for(int j=0;j<solver.col+1;j++){
+        for(int i=0;i<this.solver.col;i++){
+            for(int j=0;j<this.solver.col+1;j++){
                 if(i==0){
                     if(j==0){
                         arrayl[i][j]=a;
                     }
                     else{
-                        arrayl[i][j]=solver.sum1(j-1);
+                        arrayl[i][j]=this.solver.sum1(j-1);
                     }
                 }
                 else{
                     if(j==0){
-                        arrayl[i][j]=solver.sum1(i-1);
+                        arrayl[i][j]=this.solver.sum1(i-1);
                     }
                     else{
-                        arrayl[i][j]=solver.sum2(i-1,j-1);
+                        arrayl[i][j]=this.solver.sum2(i-1,j-1);
                     }
                 }
             }
         }
         //merubah matriks
-        solver.row=solver.col;
-        solver.col=solver.col+1;
+        this.solver.row=this.solver.col;
+        this.solver.col=this.solver.col+1;
 
-        for(int i=0;i<solver.row;i++){
-            for(int j=0;j<solver.col;j++){
-                solver.array[i][j]=arrayl[i][j];
+        for(int i=0;i<this.solver.row;i++){
+            for(int j=0;j<this.solver.col;j++){
+                this.solver.array[i][j]=arrayl[i][j];
             }
         }
-        solver.Hasil_OBE();
+        this.solver.Hasil_OBE();
         System.out.println("Diperoleh hasil RLB Ganda");
-        solver.Display();        
+        this.solver.Display();        
         
         //print solusi
-        solver.mintoZero();
+        this.solver.mintoZero();
         System.out.printf("Y = ");
-        for(int i=0;i<solver.row;i++){
-            if(solver.array[i][solver.col-1]!=0){
+        for(int i=0;i<this.solver.row;i++){
+            if(this.solver.array[i][this.solver.col-1]!=0){
                 if(i==0){
                     System.out.printf("%.3f ",solver.array[i][solver.col-1]);
                 }
@@ -64,46 +73,164 @@ public class RLB {
             }
         }
     }
-    public String save(Matrix solver){
+    public  void save(){
         String hasil = "Y = ";
-        for(int i=0;i<solver.row;i++){
-            if(solver.array[i][solver.col-1]!=0){
+        for(int i=0;i<this.solver.row;i++){
+            if(this.solver.array[i][this.solver.col-1]!=0){
                 if(i==0){
-                    hasil+=String.format("%.3f ",solver.array[i][solver.col-1]);
+                    hasil+=String.format("%.3f ",this.solver.array[i][this.solver.col-1]);
                     // System.out.printf("%.3f ",solver.array[i][solver.col-1]);
                 }
                 else{
                     if(solver.array[i][solver.col-1]>0){
-                        hasil+=String.format("+ %.3f*X%d ",solver.array[i][solver.col-1],i);
+                        hasil+=String.format("+ %.3f*X%d ",this.solver.array[i][this.solver.col-1],i);
                         // System.out.printf("+ %.3f*X%d ",solver.array[i][solver.col-1],i);
                     }
                     else{
-                        hasil+=String.format("- %.3f*X%d ",-solver.array[i][solver.col-1],i);
+                        hasil+=String.format("- %.3f*X%d ",-this.solver.array[i][this.solver.col-1],i);
                         // System.out.printf("- %.3f*X%d ",-solver.array[i][solver.col-1],i);
                         
                     }
                 }
             }
         }
-        return hasil;       
+        this.persamaan = hasil;      
     }
-    public void Hasil(Matrix solver){
+    public Double hasiltaksir(Double nilai){
+        /*
+         * Spesifikasi fungsi : menghitung hasil taksir dari suatu nilai
+         */
         Double hasil = 0.0;
-        for(int i=1;i<solver.row;i++){
-            System.out.printf("Masukkan nilai X%d",1+i);
-            Double inp=input.nextDouble();
-            hasil+=solver.array[i][solver.col-1]*inp;
+        for(int i=0;i<solver.row;i++){
+            if(solver.array[i][solver.col-1]!=0){
+                hasil+=solver.array[i][solver.col-1]*Math.pow(nilai, i);
+            }
         }
-        System.out.printf("Y = %.3f",solver.array[0][solver.col-1]+hasil);
+        return hasil;
+         
     }
-
-    // public static void main(String[] args) {
-    //     Matrix a = new Matrix();
-    //     // Matrix b = new Matrix();
-    //     a.IsiMatriks(20, 4);
-    //     // b.transpose(a);
-    //     RLB_Ganda(a);
-    //     System.out.println();
-    //     System.out.println(save(a));
-    // }
+    public void inputRLB(){
+        /*
+         * input nilai taksir dan nilai observasi
+         * I.S = nilai taksir dan nilai observasi belum diinput
+         * F.S = nilai taksir dan nilai observasi sudah diinput
+         */
+        Scanner input = new Scanner(System.in);
+        System.out.println("Masukkan jumlah peubah : ");
+        this.solver.col = input.nextInt()+1;
+        System.out.println("Masukkan jumlah sampel : ");
+        this.solver.row = input.nextInt();
+        for (int i=0;i<solver.row;i++){
+            for (int j=0;j<this.solver.col;j++){
+                if (j==this.solver.col-1){
+                    System.out.printf("Masukkan nilai Y%d : ",i+1);
+                    this.solver.array[i][j] = input.nextFloat();
+                }
+                else{
+                    System.out.printf("Masukkan nilai X%d%d : ",j+1,i+1);
+                    this.solver.array[i][j] = input.nextFloat();
+                }
+            }
+        }
+        System.out.println("Masukkan nilai X yang ingin ditaksir ");
+        this.length = input.nextInt();
+        for (int j = 0 ;j<this.length;j++){
+            System.out.printf("Masukkan nilai X%d : ",j+1);
+            this.nilaiTaksir[j] = input.nextDouble();
+        }
+    }
+    public void InputFile(String filename){
+        /*
+         * Membuat matriks dari masukan file
+         * I.S. Masukkan nama file
+         * F.S. Terbentuk Matriks
+         */
+        try{
+            FileReader file = new FileReader("test/"+filename);
+            BufferedReader br = new BufferedReader(file);   
+            String line = br.readLine();
+            int i = 0;
+            this.length = 0;
+            while (line != null){
+                String [] data = line.split(" ");
+                if (data.length != 1){
+                    this.solver.col = data.length;
+                    for (int j=0;j<data.length;j++){
+                        this.solver.array[i][j] = Double.parseDouble(data[j]);
+                    }
+                }else if (data.length == 1){
+                    this.nilaiTaksir[this.length] = Double.parseDouble(data[0]);
+                    this.length++;
+                }
+                line = br.readLine();
+                i = i + 1;
+            }
+            br.close();
+            System.out.println(i);
+            this.solver.row = i-length;
+        }
+        catch(Exception e){
+            System.out.println("File tidak ditemukan");
+            System.out.println(e);
+        }
+    }
+    public void outputFile(String filename){
+        /*
+         * Menyimpan hasil perhitungan ke file
+         * I.S. Matriks sudah terbentuk
+         * F.S. File hasil perhitungan tersimpan
+         */
+         try{
+            FileWriter file = new FileWriter("hasil/"+filename);
+            BufferedWriter bw = new BufferedWriter(file);
+            bw.write(this.persamaan);
+            for (int i=0;i<this.length;i++){
+                bw.newLine();
+                bw.write(String.format("f(%.2f) = %.3f",nilaiTaksir[i],hasiltaksir(this.nilaiTaksir[i])));
+            }
+            bw.close();
+         }
+         catch(Exception e){
+            System.out.println("File tidak ditemukan");
+            System.out.println(e);
+         }
+    }
+    public static void main(){
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        RLB rlb = new RLB();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            rlb.InputFile(filename);
+            }
+        else{
+            rlb.inputRLB();
+            }
+            rlb.RLB_Ganda();
+            rlb.save(); 
+            System.out.print('\n');
+            for (int i = 0;i<rlb.length;i++){
+                System.out.printf("f(%.2f) = %.2f\n",rlb.nilaiTaksir[i],rlb.hasiltaksir(rlb.nilaiTaksir[i]));
+            }
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input2.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input3.nextLine();
+            rlb.outputFile(filename);
+        }
+    }  
+    public static void main(String[] args) {
+        RLB.main();
+    }
 }

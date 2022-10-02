@@ -21,9 +21,11 @@ public class interpolationBicubic {
         Scanner input = new Scanner(System.in);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
+                System.out.printf("f(%d,%d) = ", i-1,j-1);
                 this.matriksInput.array[i][j] = input.nextDouble();
             }
         }
+        System.out.print("Masukkan x y [0,1]: ");
         this.a = input.nextDouble();
         this.b = input.nextDouble();
         this.matriksInput.row = 4;
@@ -86,7 +88,7 @@ public class interpolationBicubic {
                 k++;
             }
         }
-        System.out.println(this.persamaan);
+        System.out.println("f("+this.a+","+this.b+") = "+this.hasilInterpolasi);
     }
     
     public void inputMatrixFile(String filename) {
@@ -129,7 +131,6 @@ public class interpolationBicubic {
         * F.S. Terbentuk file interpolasi.txt
         */
         try {
-            System.out.println("f("+this.a+","+this.b+") = "+this.hasilInterpolasi);
             FileWriter file = new FileWriter("hasil/"+filename);
             file.write("f("+this.a+","+this.b+") = "+String.format("%.3f", this.hasilInterpolasi));
             file.close();
@@ -139,11 +140,37 @@ public class interpolationBicubic {
             System.out.println(e);
         }
     }
-    public static void main(String[] args) {
+    public static void main() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
         interpolationBicubic interpolasi = new interpolationBicubic();
-        interpolasi.inputMatrixFile("2.txt");
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            interpolasi.inputMatrixFile(filename);
+            
+            }
+        else{
+            interpolasi.inputMatrix();
+            }
         interpolasi.hasilBicubicInterpolasi();
-        interpolasi.outputMatrixFile("interpolasi.txt");
+
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input2.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input3.nextLine();
+            interpolasi.outputMatrixFile(filename);
+        }
     }
 }
 

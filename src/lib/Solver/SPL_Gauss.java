@@ -1,11 +1,15 @@
 package lib.Solver;
 
+import java.util.*;
+
 import lib.Matrix.Matrix;
+import lib.Utils.IO;
 
 /**
  * SPL_Gauss
  */
 public class SPL_Gauss {
+
     public static void Gauss(Matrix solver){
         int idx;
         double pengurang;
@@ -195,10 +199,41 @@ public class SPL_Gauss {
             solver.DisplaySolution();
         }
     }
-    public static void main(String[] args) {
-        Matrix a = new Matrix();
-        a.IsiMatriks(9,16);
-        SPL_Gauss.Gauss(a);
-    }
-    
+    public static void main() {
+        Scanner input = new Scanner(System.in);
+        Scanner input3 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        String file ;
+        String[] solusi;
+        Matrix solver = new Matrix();
+        do{
+            System.out.print("Input file (y/n) : ");
+            file = input.nextLine();
+        }while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            solver = IO.inputMatrixFile(filename);
+            }
+        else{
+            System.out.print("Masukkan jumlah m: ");
+            int m = input3.nextInt();
+            System.out.print("Masukkan jumlah n: ");
+            int n = input2.nextInt();
+            solver.IsiMatriks(m, n);
+            }
+            Gauss(solver);
+            solusi = Matrix.SolusiSPL(solver);
+            System.out.println("test"+solusi[0]);
+        do{
+            System.out.print("Simpan solusi ke file (y/n) : ");
+            file = input.nextLine();
+        }
+        while(!file.equals("y") && !file.equals("n") && !file.equals("Y") && !file.equals("N"));
+        if(file.equals("y") || file.equals("Y")){
+            System.out.print("Masukkan nama file (filename.txt): ");
+            String filename = input.nextLine();
+            IO.outputOBEFile(filename, solusi);
+        }
+    }    
 }
