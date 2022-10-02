@@ -127,7 +127,7 @@ public class SPL_Balikan {
         return esrevni;
     }
 
-    public static void Hasil_INV(Matrix Axb){
+    public static String[] Hasil_INV(Matrix Axb){
         /* I.S. Matrix NxN+1 terdefinisi dengan bentuk Ax=b, baris = N , kolom = N+1 */
         /* F.S  Solusi dari x dengan metode x = A^-1 * b*/
         
@@ -161,18 +161,24 @@ public class SPL_Balikan {
         // balikan dari Ax
         invAx = INV_GaussJordan(Ax);
         
+        String solution[];
 
         if(!invAx.isEmpty()){
             // hasil perkalian invAx dan b
             hasil = Matrix.KaliMatrix(invAx, b);
             System.out.println("Solusi dari persamaan diatas adalah");
+            solution = new String[hasil.row];
             for(i=0;i<hasil.row;i++){
+                solution[i] = "x"+(i+1)+" = "+hasil.array[i][0];
                 System.out.printf("X%d = %.2f\n", i+1,hasil.array[i][0]);
                 //System.out.println("X"+(i+1)+": "+hasil.array[i][0]);
             }
         } else{
+            solution = new String[1];
+            solution[0] = "Tidak memiliki solusi";
             System.out.println("Solusi tidak ada");
         }
+        return solution;
     }
     public static void main() {
         Scanner input = new Scanner(System.in);
@@ -197,8 +203,8 @@ public class SPL_Balikan {
             int n = input2.nextInt();
             solver.IsiMatriks(m, n);
             }
-            Hasil_INV(solver);
-            solusi = Matrix.SolusiSPL(solver);
+            solusi = Hasil_INV(solver);
+            
         do{
             System.out.print("Simpan solusi ke file (y/n) : ");
             file = input.nextLine();
