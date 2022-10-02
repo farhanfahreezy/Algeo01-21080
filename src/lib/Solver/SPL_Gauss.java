@@ -224,6 +224,7 @@ public class SPL_Gauss {
             }
             Gauss(solver);
             solusi = Matrix.SolusiSPL(solver);
+            System.out.println("test"+solusi[0]);
         do{
             System.out.print("Simpan solusi ke file (y/n) : ");
             file = input.nextLine();
