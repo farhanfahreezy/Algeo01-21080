@@ -152,15 +152,15 @@ public class SPL_Balikan {
                 Ax.array[i][j]=Axb.array[i][j];
             }
         }
-        System.out.println("1");
+        
         // isi Matrix b ukuran Nx1
         for(i=0;i<Ax.row;i++){
             b.array[i][0]=Axb.array[i][Axb.col-1];
         }
-        System.out.println("2");
+        
         // balikan dari Ax
         invAx = INV_GaussJordan(Ax);
-        System.out.println("3");
+        
 
         if(!invAx.isEmpty()){
             // hasil perkalian invAx dan b
