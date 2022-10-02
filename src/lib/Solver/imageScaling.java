@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import lib.Matrix.Matrix;
@@ -366,6 +367,7 @@ public class imageScaling {
          * I.S : Gambar terdefinisi
          * F.S : Gambar diperbesar
          */
+        System.out.println("loading...");
         this.output = new BufferedImage(this.width*2, this.height*2, BufferedImage.TYPE_INT_ARGB);
         isigambar(0, this.width-3, 0, this.height-3,0); // tengah
         isigambar(0, this.width-3, -1, 0,1); // atas
@@ -377,7 +379,7 @@ public class imageScaling {
         isigambar(this.width-3, this.width-2, -1, 0, 6); // kanan atas
         isigambar(-1, 0, this.height-3, this.height-2, 7); // kiri bawah
         isigambar(this.width-3, this.width-2, this.height-3, this.height-2, 8); // kanan bawah
-
+        System.out.println("done");
         
     }
     public void outputImage() {
@@ -394,6 +396,16 @@ public class imageScaling {
             e.printStackTrace();
         }
     }
+public static void main() {
+    Scanner input = new Scanner(System.in);
+    String filename ;
+    imageScaling img = new imageScaling();
+    System.out.print("Masukkan nama file (gambar.png): ");
+    filename = input.nextLine();
+    img.inputImage(filename);
+    img.perbesarGambar();
+    img.outputImage();
+}
     public static void main(String[] args) {
         imageScaling img = new imageScaling();
         img.inputImage("test.png");
