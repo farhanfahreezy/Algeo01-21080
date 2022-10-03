@@ -283,3 +283,11 @@ Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) 
 ### Interpolasi Bicubic
 ### Regresi Linier Berganda
 ### Perbesar Gambar
+Mula-mula akan ditanya masukan input file ```Masukkan nama file (gambar.png):``` pastikan format file dalam png
+```
+Perbesar Gambar
+Masukkan nama file (gambar.png): nyan.png
+loading...
+done
+```
+Setelah selesai file akan tersimpan dalam folder hasil dengan format ```output.png```
