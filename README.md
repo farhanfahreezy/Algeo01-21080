@@ -284,9 +284,9 @@ Mula-mula akan ditanya masukan input file atau tidak Input file (y/n) : jika mem
 ```
 Interpolasi Polinom
 Input file (y/n) : y
-Masukkan nama file (filename.txt): polinomb.txt
-P(x) = 7.191043175045852E12 + -9.35161531589144E12 X + 5.336587667141117E12 X^2 - 1.757526932593959E12 X^3 + 3.6868913056006055E11 X^4 - 5.114965157579532E10 X^5 + 4.697327200671469E9 X^6 - 2.755580954627556E8 X^7 + 9375523.81015 X^8 - 141031.71617072617 X^9
-P(9.17) = -667748.82
+Masukkan nama file (filename.txt): polinom.txt
+P(x) = 7.191043175045852E12 - 9.35161531589144E12X + 5.336587667141117E12 X^2 - 1.757526932593959E12 X^3 + 3.6868913056006055E11 X^4 - 5.114965157579532E10 X^5 + 4.697327200671469E9 X^6 - 2.755580954627556E8 X^7 + 9375523.81015 X^8 - 141031.71617072617 X^9
+P(7.22) = 33377.75
 ```
 ### Interpolasi Bicubic
 Mula-mula akan ditanya masukan input file atau tidak Input file (y/n) : jika memilih (y) akan meminta masukan file txt pada folder test
