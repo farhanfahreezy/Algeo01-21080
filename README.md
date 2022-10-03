@@ -149,7 +149,97 @@ X3 = 0.98
 ```
 Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ## Determinan
-
+Saat memilih nomor 2, akan ditampilkan menu 
+```
+====================================
+=                                  =
+= 1. Metode Ekspansi Kofaktor      =
+= 2. Metode Gauss                  =
+= 3. Kembali                       =
+=                                  =
+====================================
+Pilihan :
+```
+Masukan pilihan 1-3 (inklusif)
+### Metode Ekspansi Kofaktor
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan nilai n untuk matriks square
+```
+Masukkan jumlah n: 4
+4 1 4 2
+5 3 6 2
+9 8 1 0
+7 9 9 1
+```
+Setelah itu ditampilkan hasil determinan metode ekspansi kofaktor 
+```
+Determinan dengan metode reduksi baris kofaktor: -9.0
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
+### Metode Gauss
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan nilai n untuk matriks square
+```
+Masukkan jumlah n: 4
+4 1 4 2
+5 3 6 2
+9 8 1 0
+7 9 9 1
+```
+Setelah itu ditampilkan hasil Determinan metode Gauss
+```
+Determinan dengan metode Gauss: -9.0
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ## Matriks Balikan
-
+Saat memilih nomor 3, akan ditampilkan menu 
+```
+====================================
+=                                  =
+= 1. Metode Gauss-Jordan           =
+= 2. Metode Adjoin                 =
+= 3. Kembali                       =
+=                                  =
+====================================
+Pilihan :
+```
+Masukan pilihan 1-3 (inklusif)
+### Metode Gauss-Jordan
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan nilai n untuk matriks square
+```
+Masukkan jumlah n: 4
+4 1 4 2
+5 3 6 2
+9 8 1 0
+7 9 9 1
+```
+Setelah itu ditampilkan hasil matriks balikan 
+```
+Hasil invers Gauss Jordan
+-9.00 10.56 0.67 -3.11
+11.00 -12.89 -0.67 3.78
+-7.00 8.11 0.33 -2.22
+27.00 -30.89 -1.67 8.78
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
+### Metode Adjoin
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan nilai n untuk matriks square
+```
+Masukkan jumlah n: 4
+4 1 4 2
+5 3 6 2
+9 8 1 0
+7 9 9 1
+```
+Setelah itu ditampilkan hasil matriks balikan 
+```
+Hasil invers Adjoin
+-9.00 10.56 0.67 -3.11
+11.00 -12.89 -0.67 3.78
+-7.00 8.11 0.33 -2.22
+27.00 -30.89 -1.67 8.78
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ## Aplikasi
