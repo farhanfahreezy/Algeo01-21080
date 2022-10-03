@@ -7,11 +7,17 @@
 | Vieri Fajar Firdaus      | 13521099  |   
 | Mohammad Farhan Fahrezy | 13521105      |   
 
-## Menjalankan Program 
+## Menjalankan Program
+### Tanpa File .jar
 1. Clone repository ini ```git clone https://github.com/farhanfahrezy/Tubes-1-Algeo-SPL.git``` atau download zip.
 2. ```cd Tubes-1-Algeo-SPL/src```
 3. Untuk mengcompile program  ```javac -d ../bin main.java```
 4. Untuk menjalankan program ```cd ../bin``` setelah itu ```java main```
+
+### Menggunakan File .jar
+1. Clone repository ini ```git clone https://github.com/farhanfahrezy/Tubes-1-Algeo-SPL.git``` atau download zip.
+2. ```cd Tubes-1-Algeo-SPL/src```
+3. Untuk menjalankan program ``java -jar SPLdeck.jar``
 
 ## Menu Utama
 Setelah menjalankan program, akan ditampilkan menu seperti berikut
