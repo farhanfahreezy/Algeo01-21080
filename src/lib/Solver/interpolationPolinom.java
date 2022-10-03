@@ -73,20 +73,10 @@ public class interpolationPolinom {
                     }else if (solution[1] == -1){
                         this.persamaan = this.persamaan+" - X";
                     }else{
-                        if(solution[1]>0){
-                            this.persamaan = this.persamaan+" + "+Double.toString(solution[i])+" X";
-                        }
-                        else{
-                            this.persamaan = this.persamaan+" - "+Double.toString(solution[i]*-1)+" X";
-                        }
+                        this.persamaan = this.persamaan+" + "+Double.toString(solution[i])+" X";
                     }
                 }else{
-                    if(solution[1]>0){
-                        this.persamaan = this.persamaan+Double.toString(solution[i])+" X";
-                    }
-                    else{
-                        this.persamaan = this.persamaan+" - "+Double.toString(solution[i]*-1)+" X";
-                    }
+                    this.persamaan = this.persamaan+Double.toString(solution[i])+" X";
                 }
             }
             else{
@@ -126,7 +116,7 @@ public class interpolationPolinom {
          */
             Matrix temp = new Matrix();
         try{
-            FileReader file = new FileReader("test/"+filename);
+            FileReader file = new FileReader("../test/"+filename);
             BufferedReader br = new BufferedReader(file);   
             String line = br.readLine();
             int i = 0;
@@ -136,11 +126,11 @@ public class interpolationPolinom {
                     for (int j=0;j<data.length;j++){
                         temp.array[i][j] = Double.parseDouble(data[j]);
                     }
+                    i = i + 1;
                 }else{
                     this.nilaiTaksir = Double.parseDouble(data[0]);
                 }
                 line = br.readLine();
-                i = i + 1;
             }
             br.close();
             this.N = i;
@@ -168,7 +158,7 @@ public class interpolationPolinom {
          * F.S. Terbentuk file interpolasi.txt
          */
         try{
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             file.write(this.persamaan);
             file.write("\n");
             file.write(nilaiTaksir());
@@ -212,3 +202,8 @@ public class interpolationPolinom {
         }
     }
 }
+
+
+
+
+	
