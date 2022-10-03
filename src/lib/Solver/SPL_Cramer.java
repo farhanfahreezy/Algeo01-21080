@@ -54,7 +54,7 @@ public class SPL_Cramer {
             // Mengeluarkan hasil perhitungan
             System.out.println("Hasil Operasi Perhitungan Cramer adalah: ");
             for(i=0;i<solusi.length;i++){
-                System.out.println("X-"+(i+1)+": "+solusi[i]);
+                System.out.println("X-"+(i+1)+": "+String.format("%.2f",solusi[i]));
             }
         }
         
