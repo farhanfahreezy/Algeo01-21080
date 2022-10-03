@@ -88,7 +88,7 @@ public class interpolationBicubic {
                 k++;
             }
         }
-        System.out.println("f("+this.a+","+this.b+") = "+this.hasilInterpolasi);
+        System.out.println("f("+this.a+","+this.b+") = "+String.format("%.2f",this.hasilInterpolasi));
     }
     
     public void inputMatrixFile(String filename) {

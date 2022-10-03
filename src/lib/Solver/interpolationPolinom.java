@@ -126,11 +126,11 @@ public class interpolationPolinom {
                     for (int j=0;j<data.length;j++){
                         temp.array[i][j] = Double.parseDouble(data[j]);
                     }
+                    i = i + 1;
                 }else{
                     this.nilaiTaksir = Double.parseDouble(data[0]);
                 }
                 line = br.readLine();
-                i = i + 1;
             }
             br.close();
             this.N = i;
