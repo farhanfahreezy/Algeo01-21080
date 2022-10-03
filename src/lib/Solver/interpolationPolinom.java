@@ -72,6 +72,8 @@ public class interpolationPolinom {
                         this.persamaan = this.persamaan+" + X";
                     }else if (solution[1] == -1){
                         this.persamaan = this.persamaan+" - X";
+                    }else if (solution[1] < 0){
+                        this.persamaan = this.persamaan+" - "+Double.toString(Math.abs(solution[1]))+"X";
                     }else{
                         this.persamaan = this.persamaan+" + "+Double.toString(solution[i])+" X";
                     }
