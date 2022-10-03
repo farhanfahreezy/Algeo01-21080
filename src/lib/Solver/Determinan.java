@@ -102,10 +102,8 @@ public class Determinan {
     }
     public static void mainKofaktor() {
         Scanner input = new Scanner(System.in);
-        Scanner input3 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String file ;
-        String[] solusi;
         Matrix solver = new Matrix();
         do{
             System.out.print("Input file (y/n) : ");
@@ -136,10 +134,8 @@ public class Determinan {
     }
     public static void mainGauss() {
         Scanner input = new Scanner(System.in);
-        Scanner input3 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String file ;
-        String[] solusi;
         Matrix solver = new Matrix();
         do{
             System.out.print("Input file (y/n) : ");

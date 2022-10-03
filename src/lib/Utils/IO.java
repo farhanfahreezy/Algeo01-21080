@@ -61,7 +61,7 @@ public class IO {
         try {
             FileWriter file = new FileWriter("../hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
-            bw.write("Determinan: "+det);
+            bw.write("Determinan: "+String.format("%.2f", det));
             bw.close();
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");
