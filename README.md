@@ -81,7 +81,26 @@ X2 = 2.00
 Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ### Metode Eliminasi Gauss Jordan
 
-
+Saat memilih nomor 1, akan ditampilkan menu 
+```
+====================================
+=                                  =
+= 1. Metode Eliminasi Gauss        =
+= 2. Metode Eliminasi Gauss-Jordan =
+= 3. Metode Matriks Balikan        =
+= 4. Kaidah Cramer                 =
+= 5. Kembali                       =
+=                                  =
+====================================
+Pilihan : 
+```
+Masukan pilihan 1-5 (inklusif)
+### Metode Eliminasi Gauss-Jordan
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan jumlah baris dan kolom matriks augmented
+```
+Masukkan jumlah m: 3
+Masukkan jumlah n: 4
 ## Determinan
 
 ## Matriks Balikan
