@@ -148,6 +148,42 @@ X2 = - 0.38
 X3 = 0.98
 ```
 Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
+### Metode Matriks Balikan
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan jumlah baris dan kolom matriks augmented
+```
+Masukkan jumlah m: 3
+Masukkan jumlah n: 4
+3 4 -2 1
+5 1 3 10
+2 0 -1 2
+```
+Setelah itu ditampilkan solusi SPL metode balikan 
+```
+Solusi dari persamaan diatas adalah:
+X1 = 1.49
+X2 = - 0.38
+X3 = 0.98
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
+### Metode Kaidah Cramer
+Mula-mula akan ditanya masukan input file atau tidak ```Input file (y/n) : ```
+jika memilih tidak (n) akan meminta masukan jumlah baris dan kolom matriks augmented
+```
+Masukkan jumlah m: 3
+Masukkan jumlah n: 4
+3 4 -2 1
+5 1 3 10
+2 0 -1 2
+```
+Setelah itu ditampilkan solusi SPL metode balikan 
+```
+Hasil Operasi Perhitungan Cramer adalah: 
+X-1: 1.49
+X-2: -0.38
+X-3: 0.98
+```
+Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ## Determinan
 Saat memilih nomor 2, akan ditampilkan menu 
 ```
