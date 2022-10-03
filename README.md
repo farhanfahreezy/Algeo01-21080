@@ -10,8 +10,8 @@
 ## Menjalankan Program 
 1. Clone repository ini ```git clone https://github.com/farhanfahrezy/Tubes-1-Algeo-SPL.git``` atau download zip.
 2. ```cd Tubes-1-Algeo-SPL/src```
-3. Untuk mengcompile program  ```javac -d bin main.java```
-4. Untuk menjalankan program ```cd bin``` setelah itu ```java main```
+3. Untuk mengcompile program  ```javac -d ../bin main.java```
+4. Untuk menjalankan program ```cd ../bin``` setelah itu ```java main```
 
 ## Menu Utama
 Setelah menjalankan program, akan ditampilkan menu seperti berikut
