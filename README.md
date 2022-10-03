@@ -279,3 +279,7 @@ Hasil invers Adjoin
 ```
 Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) : ```
 ## Aplikasi
+### Interpolasi Polinom
+### Interpolasi Bicubic
+### Regresi Linier Berganda
+### Perbesar Gambar
