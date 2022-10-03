@@ -116,7 +116,7 @@ public class interpolationPolinom {
          */
             Matrix temp = new Matrix();
         try{
-            FileReader file = new FileReader("test/"+filename);
+            FileReader file = new FileReader("../test/"+filename);
             BufferedReader br = new BufferedReader(file);   
             String line = br.readLine();
             int i = 0;
@@ -158,7 +158,7 @@ public class interpolationPolinom {
          * F.S. Terbentuk file interpolasi.txt
          */
         try{
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             file.write(this.persamaan);
             file.write("\n");
             file.write(nilaiTaksir());

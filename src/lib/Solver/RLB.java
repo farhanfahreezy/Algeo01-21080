@@ -147,7 +147,7 @@ public class RLB {
          * F.S. Terbentuk Matriks
          */
         try{
-            FileReader file = new FileReader("test/"+filename);
+            FileReader file = new FileReader("../test/"+filename);
             BufferedReader br = new BufferedReader(file);   
             String line = br.readLine();
             int i = 0;
@@ -188,7 +188,7 @@ public class RLB {
          * F.S. File hasil perhitungan tersimpan
          */
          try{
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             bw.write(this.persamaan);
             bw.newLine();

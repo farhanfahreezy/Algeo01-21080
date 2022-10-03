@@ -35,7 +35,7 @@ public class imageScaling {
         * F.S : Gambar terinput
         */
         try {
-            File file = new File("test/"+filename);
+            File file = new File("../test/"+filename);
             this.image = ImageIO.read(file);
             this.width = image.getWidth();
             this.height = image.getHeight();
@@ -389,7 +389,7 @@ public class imageScaling {
          * F.S : Gambar teroutput
          */
         try {
-            File file = new File("hasil/output.png");
+            File file = new File("../hasil/output.png");
             ImageIO.write(this.output, "png", file);
         } catch (IOException e) {
             System.out.println("File tidak ditemukan");

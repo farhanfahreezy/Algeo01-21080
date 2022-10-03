@@ -13,7 +13,7 @@ public class IO {
          */
         Matrix matriks = new Matrix();
         try {
-            FileReader file = new FileReader("test/"+filename);
+            FileReader file = new FileReader("../test/"+filename);
             BufferedReader br = new BufferedReader(file);
             String line = br.readLine();  
             int row = 0;
@@ -40,7 +40,7 @@ public class IO {
          * F.S. array ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             for (int i = 0; i < array.length; i++) {
                 bw.write(array[i]);
@@ -59,7 +59,7 @@ public class IO {
          * F.S. det ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             bw.write("Determinan: "+det);
             bw.close();
@@ -76,7 +76,7 @@ public class IO {
          * F.S. matriks ditulis ke dalam file
          */
         try {
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             for (int i = 0; i < matriks.row; i++) {
                 for (int j = 0; j < matriks.col; j++) {
@@ -92,7 +92,7 @@ public class IO {
     }
     public static void main(String[] args) throws IOException {
         Matrix matriks = new Matrix();
-        matriks = inputMatrixFile("2.txt");
+        matriks = inputMatrixFile("3.txt");
         matriks.Display();
     }
 }

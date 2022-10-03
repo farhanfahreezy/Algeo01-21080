@@ -98,7 +98,7 @@ public class interpolationBicubic {
         * F.S. Matriks dan Nilai terisi dengan inputan file
         */
         try {
-            FileReader file = new FileReader("test/"+filename);
+            FileReader file = new FileReader("../test/"+filename);
             BufferedReader br = new BufferedReader(file);
             String line;
             int row = 0;
@@ -131,7 +131,7 @@ public class interpolationBicubic {
         * F.S. Terbentuk file interpolasi.txt
         */
         try {
-            FileWriter file = new FileWriter("hasil/"+filename);
+            FileWriter file = new FileWriter("../hasil/"+filename);
             file.write("f("+this.a+","+this.b+") = "+String.format("%.3f", this.hasilInterpolasi));
             file.close();
         }
