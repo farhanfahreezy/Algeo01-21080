@@ -282,4 +282,50 @@ Kemudian meminta masukan membuat file atau tidak ```Simpan solusi ke file (y/n) 
 ### Interpolasi Polinom
 ### Interpolasi Bicubic
 ### Regresi Linier Berganda
+Mula-mula akan ditanya masukan input file atau tidak Input file (y/n) : jika memilih tidak (y) akan meminta masukan file txt pada folder test
+```
+Regresi Linear Berganda
+Input file (y/n) : y
+Masukkan nama file (filename.txt): 4.txt
+Masukkan nilai X yang ingin ditaksir 
+Masukkan nilai X1 : 50
+Masukkan nilai X2 : 76
+Masukkan nilai X3 : 29.30
+20
+72.40 76.30 29.18 0.90
+41.60 70.30 29.35 0.91
+34.30 77.10 29.24 0.96
+35.10 68.00 29.27 0.89
+10.70 79.00 29.78 1.00
+12.90 67.40 29.39 1.10
+8.30 66.80 29.69 1.15
+20.10 76.90 29.48 1.03
+72.20 77.70 29.09 0.77
+24.00 67.70 29.60 1.07
+23.20 76.80 29.38 1.07
+47.40 86.60 29.35 0.94
+31.50 76.90 29.63 1.10
+10.60 86.30 29.56 1.10
+11.20 86.00 29.48 1.10
+73.30 76.30 29.40 0.91
+75.40 77.90 29.28 0.87
+96.60 78.70 29.29 0.78
+107.40 86.80 29.03 0.82
+54.90 70.90 29.37 0.95
+Diperoleh hasil RLB Ganda
+1.00 0.00 0.00 0.00 -3.50
+0.00 1.00 0.00 0.00 -0.00
+0.00 0.00 1.00 0.00 0.00
+0.00 0.00 0.00 1.00 0.15
+Y = -3.505 - 0.003*X1 + 0.001*X2 + 0.154*X3
+Hasil taksiran nilai y dari regresi linear adalah : 0.938
+```
 ### Perbesar Gambar
+Mula-mula akan ditanya masukan input file ```Masukkan nama file (gambar.png):``` pastikan format file dalam png
+```
+Perbesar Gambar
+Masukkan nama file (gambar.png): nyan.png
+loading...
+done
+```
+Setelah selesai file akan tersimpan dalam folder hasil dengan format ```output.png```
