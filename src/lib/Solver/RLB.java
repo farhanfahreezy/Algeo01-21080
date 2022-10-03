@@ -96,14 +96,15 @@ public class RLB {
         }
         this.persamaan = hasil;      
     }
-    public Double hasiltaksir(Double nilai){
+    public Double hasiltaksir(Double[] nilai){
         /*
          * Spesifikasi fungsi : menghitung hasil taksir dari suatu nilai
          */
         Double hasil = 0.0;
-        for(int i=0;i<solver.row;i++){
+        hasil+=this.solver.array[0][this.solver.col-1];
+        for(int i=1;i<solver.row;i++){
             if(solver.array[i][solver.col-1]!=0){
-                hasil+=solver.array[i][solver.col-1]*Math.pow(nilai, i);
+                hasil+=solver.array[i][solver.col-1]*nilai[i-1];
             }
         }
         return hasil;
@@ -133,8 +134,8 @@ public class RLB {
             }
         }
         System.out.println("Masukkan nilai X yang ingin ditaksir ");
-        this.length = input.nextInt();
-        for (int j = 0 ;j<this.length;j++){
+        // this.length = input.nextInt();
+        for (int j = 0 ;j<this.solver.col-1;j++){
             System.out.printf("Masukkan nilai X%d : ",j+1);
             this.nilaiTaksir[j] = input.nextDouble();
         }
@@ -165,6 +166,12 @@ public class RLB {
                 line = br.readLine();
                 i = i + 1;
             }
+            System.out.println("Masukkan nilai X yang ingin ditaksir ");
+            // this.length = input.nextInt();
+            for (int j = 0 ;j<this.solver.col-1;j++){
+                System.out.printf("Masukkan nilai X%d : ",j+1);
+                this.nilaiTaksir[j] = input.nextDouble();
+            }
             br.close();
             System.out.println(i);
             this.solver.row = i-length;
@@ -184,10 +191,8 @@ public class RLB {
             FileWriter file = new FileWriter("hasil/"+filename);
             BufferedWriter bw = new BufferedWriter(file);
             bw.write(this.persamaan);
-            for (int i=0;i<this.length;i++){
-                bw.newLine();
-                bw.write(String.format("f(%.2f) = %.3f",nilaiTaksir[i],hasiltaksir(this.nilaiTaksir[i])));
-            }
+            bw.newLine();
+            bw.write(String.format("Hasil taksiran nilai y dari regresi linear adalah : %.3f",hasiltaksir(this.nilaiTaksir)));
             bw.close();
          }
          catch(Exception e){
@@ -216,9 +221,7 @@ public class RLB {
             rlb.RLB_Ganda();
             rlb.save(); 
             System.out.print('\n');
-            for (int i = 0;i<rlb.length;i++){
-                System.out.printf("f(%.2f) = %.2f\n",rlb.nilaiTaksir[i],rlb.hasiltaksir(rlb.nilaiTaksir[i]));
-            }
+            System.out.printf("Hasil taksiran nilai y dari regresi linear adalah : %.3f\n",rlb.hasiltaksir(rlb.nilaiTaksir));
         do{
             System.out.print("Simpan solusi ke file (y/n) : ");
             file = input2.nextLine();
