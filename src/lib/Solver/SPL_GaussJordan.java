@@ -151,7 +151,7 @@ public class SPL_GaussJordan {
             System.out.println("Solusi tidak ada\n");
         }
         else{
-            System.out.println("ngurangi jordan\n");
+            // System.out.println("ngurangi jordan\n");
             for(int i=solver.row-1;i>=0;i--){
                 boolean cek=true;
                 for(int j=0;j<=solver.col;j++){

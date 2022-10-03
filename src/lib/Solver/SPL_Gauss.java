@@ -177,7 +177,7 @@ public class SPL_Gauss {
             // solusi x1,x2,x3,...
             // System.out.println("ngurangi jordan\n");
             
-            
+            solver.mintoZero();
             for(int i=solver.row-1;i>=0;i--){
                 boolean cek=true;
                 for(int j=0;j<=solver.col;j++){
@@ -196,6 +196,7 @@ public class SPL_Gauss {
                     }
                 }
             }
+            solver.mintoZero();
             solver.DisplaySolution();
         }
     }
