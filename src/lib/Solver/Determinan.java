@@ -152,7 +152,7 @@ public class Determinan {
             solver.IsiMatriks(n, n);
             }
             double det = DET_Gauss(solver);
-            System.out.println("Determinan dengan metode Gauss: "+det);
+            System.out.println("Determinan dengan metode Gauss: "+String.format("%.2f",det));
         do{
             System.out.print("Simpan solusi ke file (y/n) : ");
             file = input.nextLine();
